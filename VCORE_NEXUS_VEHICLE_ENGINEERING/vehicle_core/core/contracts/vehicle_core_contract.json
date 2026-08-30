@@ -1,0 +1,40 @@
+{
+  "schema": "VCORE_VEHICLE_CORE",
+  "version": "1.0.0",
+  "required": [
+    "identity",
+    "configuration",
+    "systems",
+    "state"
+  ],
+  "identity": [
+    "id",
+    "type",
+    "manufacturer",
+    "model"
+  ],
+  "configuration": [
+    "massKg",
+    "wheelbaseM",
+    "cgHeightM"
+  ],
+  "systems": [
+    "propulsion",
+    "suspension",
+    "brakes",
+    "wheels"
+  ],
+  "state": [
+    "lifecycle",
+    "ready",
+    "revision"
+  ],
+  "upstream": "VCORE_UNIVERSAL_VEHICLE",
+  "downstream": [
+    "motorcycle_core",
+    "vehicle_systems",
+    "engineering_engine",
+    "vehicle_creator_ui",
+    "first_demonstrator"
+  ]
+}

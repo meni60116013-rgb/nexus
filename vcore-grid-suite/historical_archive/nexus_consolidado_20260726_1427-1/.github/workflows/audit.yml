@@ -1,0 +1,49 @@
+name: vcore-grid-suite - Auditoria Integral 360
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  security-events: write
+
+jobs:
+  audit-360:
+    name: Evaluacion Monetaria, Seguridad y Anti-Fuga
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install & Run SCC (Valuación Económica)
+        run: |
+          curl -sL https://github.com/boyter/scc/releases/download/v3.3.5/scc_Linux_x86_64.tar.gz | tar -xz
+          sudo mv scc /usr/local/bin/
+          echo "=== RESULTADO: VALUACIÓN ECONÓMICA (COCOMO II) ==="
+          scc --cocomo-project-type "semi-detached" --avg-wage 45000 .
+
+      - name: Detección de Fuga de Claves / Secretos (GitLeaks)
+        uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        continue-on-error: true
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: 'javascript'
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3

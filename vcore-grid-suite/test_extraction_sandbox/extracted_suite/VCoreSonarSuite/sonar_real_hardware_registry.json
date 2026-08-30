@@ -1,0 +1,262 @@
+[
+    {
+        "timestamp": "2026-08-20 08:16:57",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066523,
+        "longitude": -103.2744115,
+        "accuracy_m": 3.9230000972747803,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 224.1599443422497
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:05",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066527,
+        "longitude": -103.2744133,
+        "accuracy_m": 4.040999889373779,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 136.713350873061
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:15",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066539,
+        "longitude": -103.2744157,
+        "accuracy_m": 3.996000051498413,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 71.90361349684676
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:23",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066524,
+        "longitude": -103.2744145,
+        "accuracy_m": 3.681999921798706,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 261.70665046512073
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:26",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066527,
+        "longitude": -103.2744137,
+        "accuracy_m": 3.5810000896453857,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 142.41691884065187
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:29",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066539,
+        "longitude": -103.2744136,
+        "accuracy_m": 3.677000045776367,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 230.88374993323723
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:32",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066532,
+        "longitude": -103.2744132,
+        "accuracy_m": 3.7139999866485596,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 4.460473578500577
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:35",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066542,
+        "longitude": -103.2744147,
+        "accuracy_m": 3.759999990463257,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 20.325795138959215
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:37",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066541,
+        "longitude": -103.2744146,
+        "accuracy_m": 3.6730000972747803,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 174.51056377627413
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:39",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7066539,
+        "longitude": -103.2744147,
+        "accuracy_m": 3.6440000534057617,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:41",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7066535,
+        "longitude": -103.2744148,
+        "accuracy_m": 3.555999994277954,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:17:43",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7066533,
+        "longitude": -103.2744148,
+        "accuracy_m": 3.5409998893737793,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:18:01",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.706653,
+        "longitude": -103.2744138,
+        "accuracy_m": 3.9149999618530273,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 79.40399170332526
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:18:04",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066549,
+        "longitude": -103.2744129,
+        "accuracy_m": 4.013999938964844,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 163.7548027088926
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:18:14",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066547,
+        "longitude": -103.2744128,
+        "accuracy_m": 4.894000053405762,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 124.4728310016299
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:18:17",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.7066544,
+        "longitude": -103.2744136,
+        "accuracy_m": 4.860000133514404,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 218.8145718561633
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:18:22",
+        "scan_type": "acoustic_sonar",
+        "latitude": 25.706654,
+        "longitude": -103.2744133,
+        "accuracy_m": 4.175000190734863,
+        "frequency_hz": 18500,
+        "sensor_readings": {
+            "distance_estimated_m": 6,
+            "angle_deg": 72.0117360574916
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:40:15",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7067017,
+        "longitude": -103.2744181,
+        "accuracy_m": 4.261000156402588,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:40:15",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7067017,
+        "longitude": -103.274418,
+        "accuracy_m": 4.302999973297119,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    },
+    {
+        "timestamp": "2026-08-20 08:40:16",
+        "scan_type": "rf_frequency_scan",
+        "latitude": 25.7067016,
+        "longitude": -103.2744177,
+        "accuracy_m": 4.360000133514404,
+        "frequency_hz": 2400000000,
+        "sensor_readings": {
+            "network_type": "3g",
+            "downlink_mbps": 0.35
+        },
+        "message": "Registro real de hardware y GPS guardado"
+    }
+]

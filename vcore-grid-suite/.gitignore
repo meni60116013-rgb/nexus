@@ -1,0 +1,19 @@
+# Dependencias y builds
+node_modules/
+dist/
+.lovable/
+build/
+.gradle/
+
+# Archivos de entorno y seguridad
+.env
+.env.local
+*.jks
+*.keystore
+
+# Logs y base de datos local
+*.log
+*.db
+
+.env*
+.env.local

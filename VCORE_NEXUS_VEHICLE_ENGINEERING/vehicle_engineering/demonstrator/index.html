@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport"
+content="width=device-width,initial-scale=1">
+<title>VCORE NEXUS — First Demonstrator</title>
+<style>
+*{box-sizing:border-box}
+body{
+margin:0;
+background:#090b0e;
+color:#eef1f4;
+font-family:system-ui,-apple-system,sans-serif
+}
+main{
+width:min(100%,960px);
+margin:auto;
+padding:20px
+}
+header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:18px
+}
+h1{margin:0;font-size:27px}
+h2{font-size:17px}
+.status{
+padding:7px 11px;
+border:1px solid #30363d;
+border-radius:999px;
+font-size:11px
+}
+.panel{
+background:#14181d;
+border:1px solid #282e35;
+border-radius:14px;
+padding:16px;
+margin-bottom:14px
+}
+.metrics{
+display:grid;
+grid-template-columns:repeat(4,minmax(0,1fr));
+gap:10px
+}
+.metric{
+background:#1b2026;
+border-radius:10px;
+padding:13px
+}
+.metric span{
+display:block;
+color:#8f98a3;
+font-size:11px;
+margin-bottom:6px
+}
+.metric strong{font-size:18px}
+.systems{
+display:grid;
+grid-template-columns:repeat(2,minmax(0,1fr));
+gap:8px
+}
+.system{
+padding:10px;
+border:1px solid #282e35;
+border-radius:9px;
+font-size:13px
+}
+pre{
+overflow:auto;
+white-space:pre-wrap;
+color:#9ba4ae;
+font-size:12px
+}
+@media(max-width:650px){
+.metrics,.systems{grid-template-columns:1fr 1fr}
+}
+@media(max-width:420px){
+.metrics,.systems{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+<main>
+<header>
+<div>
+<h1>VCORE NEXUS</h1>
+<div>FIRST VEHICLE ENGINEERING DEMONSTRATOR</div>
+</div>
+<div class="status">ONLINE</div>
+</header>
+
+<section class="panel">
+<h2>Vehicle</h2>
+<div id="vehicle"></div>
+</section>
+
+<section class="panel">
+<h2>Engineering</h2>
+<div class="metrics">
+<div class="metric">
+<span>Mass</span>
+<strong id="mass">200 kg</strong>
+</div>
+<div class="metric">
+<span>CG X</span>
+<strong id="cg">0.61 m</strong>
+</div>
+<div class="metric">
+<span>Wheelbase</span>
+<strong id="wheelbase">1.40 m</strong>
+</div>
+<div class="metric">
+<span>Validation</span>
+<strong>PASS</strong>
+</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Performance</h2>
+<div class="metrics">
+<div class="metric">
+<span>Power</span>
+<strong>31.42 kW</strong>
+</div>
+<div class="metric">
+<span>Wheel torque</span>
+<strong>270 Nm</strong>
+</div>
+<div class="metric">
+<span>Acceleration</span>
+<strong>4.15 m/s²</strong>
+</div>
+<div class="metric">
+<span>Speed</span>
+<strong>113.10 km/h</strong>
+</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>System Integration</h2>
+<div class="systems">
+<div class="system">Vehicle Core — OK</div>
+<div class="system">Motorcycle Core — OK</div>
+<div class="system">Tubular Engineering — OK</div>
+<div class="system">Vehicle Systems — OK</div>
+<div class="system">Engineering Engine — OK</div>
+<div class="system">Vehicle Creator UI — OK</div>
+<div class="system">Powertrain / Performance — OK</div>
+</div>
+</section>
+
+<section class="panel">
+<h2>Demonstrator State</h2>
+<pre id="model"></pre>
+</section>
+</main>
+
+<script>
+const model={
+vehicle:"Nexus Engineering Motorcycle",
+massKg:200,
+cgXM:0.61,
+wheelbaseM:1.4,
+powerKW:31.41592653589793,
+wheelTorqueNm:270,
+accelerationMS2:4.15,
+speedKPH:113.09733552923255,
+validation:"PASS"
+};
+
+document.getElementById("vehicle").textContent=
+model.vehicle+" — motorcycle";
+
+document.getElementById("model").textContent=
+JSON.stringify(model,null,2);
+</script>
+</body>
+</html>

@@ -1,0 +1,26 @@
+{
+  "schema": "VCORE_UNIVERSAL_VEHICLE",
+  "version": "1.0.0",
+  "required": [
+    "id",
+    "type",
+    "massKg",
+    "wheelbaseM"
+  ],
+  "optional": [
+    "manufacturer",
+    "model",
+    "cgHeightM",
+    "systems",
+    "engineering"
+  ],
+  "compatible_domains": [
+    "vehicle_core",
+    "motorcycle_core",
+    "tubular_engineering",
+    "vehicle_systems",
+    "engineering_engine",
+    "vehicle_creator_ui",
+    "first_demonstrator"
+  ]
+}

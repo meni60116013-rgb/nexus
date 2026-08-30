@@ -1,0 +1,38 @@
+{
+  "module": "MOTORCYCLE_CORE_INTEGRATION",
+  "version": "1.0.0",
+  "type": "motorcycle",
+  "required": [
+    "id",
+    "name",
+    "version",
+    "wheelbaseM",
+    "frontWheelRadiusM",
+    "rearWheelRadiusM"
+  ],
+  "optional": [
+    "steeringHeadAngleDeg",
+    "trailM",
+    "frontSuspension",
+    "rearSuspension",
+    "frontBrake",
+    "rearBrake",
+    "powertrain"
+  ],
+  "outputs": [
+    "vehicleIdentity",
+    "chassis",
+    "wheels",
+    "suspension",
+    "brakes",
+    "powertrain",
+    "metadata"
+  ],
+  "rules": [
+    "Motorcycle Core specializes vehicle configuration.",
+    "Vehicle Core remains the universal vehicle owner.",
+    "Engineering engines remain the source of engineering calculations.",
+    "No duplicate physics engine is created.",
+    "Integration remains deterministic."
+  ]
+}

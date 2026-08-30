@@ -1,0 +1,22 @@
+[
+    {
+        "timestamp": "2026-08-20 08:43:30",
+        "coords": {
+            "lat": 25.7066751,
+            "lon": -103.2744114
+        },
+        "tipo_pulso": "MAPEOR",
+        "datos_cruzados": 2.0895980895077026,
+        "rango": "10M"
+    },
+    {
+        "timestamp": "2026-08-20 08:43:36",
+        "coords": {
+            "lat": 25.7066768,
+            "lon": -103.274418
+        },
+        "tipo_pulso": "MAPEOR",
+        "datos_cruzados": 3.803295174496867,
+        "rango": "10M"
+    }
+]

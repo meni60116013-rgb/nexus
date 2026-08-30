@@ -1,0 +1,20 @@
+{
+  "schema": "VCORE_MOTORCYCLE_SYSTEMS_CONTRACT",
+  "version": "1.0.0",
+  "module": "MOTORCYCLE_SYSTEMS_INTEGRATION",
+  "systems": [
+    "suspension",
+    "brakes",
+    "wheels",
+    "powertrain"
+  ],
+  "operations": [
+    "createMotorcycleSystems",
+    "validateMotorcycleSystems",
+    "getSystemRegistry",
+    "getMotorcycleSystemsSnapshot"
+  ],
+  "localCompilation": false,
+  "remoteCompilation": true,
+  "ciProvider": "github-actions"
+}

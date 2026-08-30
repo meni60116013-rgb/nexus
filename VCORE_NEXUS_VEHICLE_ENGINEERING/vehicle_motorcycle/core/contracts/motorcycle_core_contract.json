@@ -1,0 +1,29 @@
+{
+  "schema": "VCORE_MOTORCYCLE_CORE_CONTRACT",
+  "version": "1.0.0",
+  "vehicleType": "motorcycle",
+  "inputs": [
+    "id",
+    "category",
+    "manufacturer",
+    "model",
+    "wheelbaseM",
+    "frontWheelRadiusM",
+    "rearWheelRadiusM",
+    "steeringAngleDeg",
+    "forkOffsetM",
+    "massKg",
+    "engineType",
+    "displacementCC",
+    "enginePowerKW",
+    "engineTorqueNm",
+    "frontSuspensionType",
+    "rearSuspensionType"
+  ],
+  "outputs": [
+    "motorcycleModel",
+    "validation",
+    "motorcycleSnapshot"
+  ],
+  "integrationTarget": "vehicle-core"
+}

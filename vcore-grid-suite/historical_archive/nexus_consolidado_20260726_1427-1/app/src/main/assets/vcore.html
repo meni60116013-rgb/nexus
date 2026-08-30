@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>V-CORE NEXUX v3.0 | Engineering Interface</title>
+    <style>
+        :root {
+            --bg-main: #0b0d10;
+            --bg-card: linear-gradient(180deg, #16191d, #101214);
+            --bg-header: #15181c;
+            --accent-cyan: #0ea5e9;
+            --accent-cyan-glow: #2563eb;
+            --text-primary: #e6e6e6;
+            --text-secondary: #8fa3b5;
+            --status-ok: #00ff66;
+            --status-error: #ff3333;
+            --status-ok-bg: #101714;
+            --border-color: #2b2f35;
+            --border-card: #3b434d;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: var(--bg-main);
+            background-image: 
+                linear-gradient(45deg, #111316 25%, transparent 25%, transparent 75%, #111316 75%, #111316),
+                linear-gradient(45deg, #111316 25%, transparent 25%, transparent 75%, #111316 75%, #111316);
+            background-size: 8px 8px;
+            background-position: 0 0, 4px 4px;
+            font-family: "JetBrains Mono", "Cascadia Code", Consolas, monospace;
+            color: var(--text-primary);
+            display: flex; justify-content: center; align-items: center; min-height: 100vh; padding: 16px;
+        }
+        .phone {
+            width: 390px; background: linear-gradient(160deg, #1b1d20, #0f1114);
+            border: 1px solid var(--border-color); border-radius: 24px; padding: 16px;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8); display: flex; flex-direction: column; gap: 16px;
+        }
+        .header { background: var(--bg-header); border: 1px solid #30353d; border-radius: 16px; padding: 16px; }
+        .logo { text-align: center; font-size: 22px; font-weight: 700; color: #57b5ff; letter-spacing: 2px; }
+        .version { text-align: center; color: #7b8794; font-size: 11px; margin-bottom: 12px; }
+        .author-cr { font-size: 11px; color: #a0aec0; border-top: 1px solid #23282f; padding-top: 8px; line-height: 1.4; }
+        .status { display: flex; align-items: center; margin-top: 12px; padding: 8px 12px; border-radius: 8px; background: var(--status-ok-bg); border: 1px solid #1c8c47; }
+        .led { width: 10px; height: 10px; border-radius: 50%; background: var(--status-ok); margin-right: 10px; box-shadow: 0 0 8px var(--status-ok); }
+        .status span { color: #8bffaf; font-size: 11px; font-weight: 700; }
+        .card { background: var(--bg-card); border: 1px solid var(--border-card); border-left: 4px solid #4fc3f7; border-radius: 16px; padding: 16px; }
+        .card h2 { color: #56c8ff; font-size: 15px; margin-bottom: 16px; }
+        .data-row { margin-bottom: 12px; }
+        .label { color: var(--text-secondary); font-size: 11px; text-transform: uppercase; }
+        .value { color: #ffffff; font-size: 18px; font-weight: 700; }
+        .blueprint { margin-top: 16px; padding: 12px; border-radius: 10px; background: #0d1117; border: 1px dashed #4b5563; font-size: 12px; line-height: 1.6; }
+        .btn-action { width: 100%; padding: 16px; font-size: 14px; font-weight: 700; color: #ffffff; background: linear-gradient(90deg, var(--accent-cyan), var(--accent-cyan-glow)); border: none; border-radius: 12px; cursor: pointer; }
+        .hidden-inputs { display: none; }
+        .bottom-nav { display: flex; justify-content: space-between; background: #121418; border: 1px solid #23282f; border-radius: 14px; padding: 8px; }
+        .nav-item { flex: 1; text-align: center; font-size: 10px; color: #6272a4; padding: 8px 0; font-weight: 700; }
+        .nav-item.active { color: #56c8ff; border-bottom: 2px solid #56c8ff; }
+    </style>
+</head>
+<body>
+    <div class="phone">
+        <div class="header">
+            <div class="logo">V-CORE NEXUX</div>
+            <div class="version">v3.0 • MOTORCYCLE ENGINEERING</div>
+            <div class="author-cr">
+                <strong>DIRECCIÓN TÉCNICA:</strong> Manuel de Jesús Ovalle Carrillo<br>
+                <span>© 2026 Reservados todos los derechos del autor intelectual.</span>
+            </div>
+            <div class="status" id="statusBox">
+                <div class="led" id="statusLed"></div>
+                <span id="statusTxt">SISTEMA INTEGRADO / MEMORIA ACTIVA</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h2>⚙️ GEOMETRÍA DEL CHASIS TUBULAR</h2>
+            <div class="data-row">
+                <div class="label">Módulo de Sección (Z)</div>
+                <div class="value" id="v-wb">1,452.86 mm³</div>
+            </div>
+            <div class="data-row">
+                <div class="label">Esfuerzo de Flexión</div>
+                <div class="value" id="v-flx">85.20 MPa</div>
+            </div>
+            <div class="blueprint">
+                📌 ACERO SAE 1020 | Ø 31.75 mm (1-1/4") | CALIBRE 14 (2.11 mm)<br>
+                ESTADO RESPALDADO EN ALMACENAMIENTO LOCAL EN CALIENTE
+            </div>
+        </div>
+
+        <div class="hidden-inputs">
+            <input type="text" id="rk" value="315"><input type="text" id="of" value="620">
+            <input type="text" id="fk" value="580"><input type="text" id="sw" value="1450">
+            <input type="text" id="st" value="0"><input type="text" id="bx" value="0">
+            <input type="text" id="px" value="0"><input type="text" id="sp" value="0">
+            <input type="text" id="v-erg" value="45.0"><input type="text" id="v-trl" value="0">
+            <input type="text" id="v-tub" value="1020">
+        </div>
+
+        <button class="btn-action" id="btnExport">EXPORTAR ANÁLISIS (JSON)</button>
+
+        <div class="bottom-nav">
+            <div class="nav-item active">CHASIS</div><div class="nav-item">MAT</div>
+            <div class="nav-item">SIM</div><div class="nav-item">OUT</div>
+            <div class="nav-item">CONF</div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            let state = { wr: 315, fr: 620, fh: 580, wb: 1450, trail: 0, ea: 0, cl: 0, tt: 0, pf: 0 };
+            
+            const inp = {
+                rk: document.getElementById('rk'), of: document.getElementById('of'),
+                fk: document.getElementById('fk'), sw: document.getElementById('sw'),
+                st: document.getElementById('st'), bx: document.getElementById('bx'),
+                px: document.getElementById('px'), sp: document.getElementById('sp')
+            };
+
+            const led = document.getElementById('statusLed');
+            const txt = document.getElementById('statusTxt');
+
+            // AUTOMATIZACIÓN DE PERSISTENCIA: Cargar sesión previa si existe
+            if(localStorage.getItem('vcore_state')) {
+                try {
+                    state = JSON.parse(localStorage.getItem('vcore_state'));
+                    Object.keys(inp).forEach(key => {
+                        if(inp[key] && state[key]) inp[key].value = state[key];
+                    });
+                } catch(e) { console.error("Error recuperando estado"); }
+            }
+
+            function compute() {
+                try {
+                    // AUTOMATIZACIÓN ANTIFALLOS: Validación estricta de datos de entrada
+                    Object.keys(inp).forEach(key => {
+                        let val = parseFloat(inp[key].value);
+                        if(isNaN(val) || val < 0) {
+                            throw new Error(`Valor inválido o crítico en campo: ${key}`);
+                        }
+                    });
+
+                    // Si pasa las validaciones, actualizamos el estado e indexamos la persistencia
+                    state.wr = parseFloat(inp.rk.value) || 0;
+                    state.fr = parseFloat(inp.of.value) || 0;
+                    state.fh = parseFloat(inp.fk.value) || 0;
+                    state.wb = parseFloat(inp.sw.value) || 0;
+
+                    localStorage.setItem('vcore_state', JSON.stringify(state));
+                    
+                    led.style.backgroundColor = "var(--status-ok)";
+                    led.style.boxShadow = "0 0 8px var(--status-ok)";
+                    txt.innerText = "SISTEMA INTEGRADO / LECTURA OK";
+                } catch (error) {
+                    // Captura el error en caliente en la UI sin romper el ciclo de la app
+                    led.style.backgroundColor = "var(--status-error)";
+                    led.style.boxShadow = "0 0 8px var(--status-error)";
+                    txt.innerText = "ERROR: VALORES FUERA DE RANGO FÍSICO";
+                    console.warn(error.message);
+                }
+            }
+
+            Object.values(inp).forEach(i => {
+                if(i) i.addEventListener('input', () => { compute(); });
+            });
+
+            const btnExport = document.getElementById('btnExport');
+            if (btnExport) {
+                btnExport.addEventListener('click', () => {
+                    const json = JSON.stringify(state, null, 2);
+                    if (window.Android && window.Android.exportJSON) {
+                        window.Android.exportJSON(json);
+                    } else {
+                        const a = document.createElement('a');
+                        a.href = "data:text/json;charset=utf-8," + encodeURIComponent(json);
+                        a.download = `VCORE_${Math.round(state.wb || 1452)}MM.json`;
+                        a.click();
+                    }
+                });
+            }
+            compute();
+        });
+    </script>
+</body>
+</html>

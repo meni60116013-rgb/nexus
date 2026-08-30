@@ -1,0 +1,38 @@
+{
+  "module": "VEHICLE_SYSTEMS_INTEGRATION",
+  "version": "1.0.0",
+  "systems": {
+    "wheels": [
+      "front",
+      "rear"
+    ],
+    "suspension": [
+      "front",
+      "rear"
+    ],
+    "brakes": [
+      "front",
+      "rear"
+    ],
+    "powertrain": [
+      "engine",
+      "transmission",
+      "finalDrive"
+    ]
+  },
+  "rules": [
+    "Systems are configuration domains.",
+    "Specialized engineering engines own calculations.",
+    "Suspension dynamics remain in Suspension/Dynamics Engine.",
+    "Powertrain calculations remain in Powertrain/Performance Engine.",
+    "No duplicate physics implementation is allowed.",
+    "Vehicle Systems must be consumable by Vehicle Core.",
+    "Heavy compilation remains in GitHub Actions."
+  ],
+  "outputs": [
+    "wheelConfiguration",
+    "suspensionConfiguration",
+    "brakeConfiguration",
+    "powertrainConfiguration"
+  ]
+}

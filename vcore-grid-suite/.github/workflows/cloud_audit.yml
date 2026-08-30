@@ -1,0 +1,45 @@
+name: Cloud Repositories Deep Audit
+
+on:
+  workflow_dispatch:
+
+jobs:
+  audit-cloud:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      
+    steps:
+      - name: Fetch Repos Metadata via GitHub API
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          mkdir -p cloud_reports
+          REPOS=("vcore-grid-suite" "VCORE-GRID-SUITE-MASTER" "sovereign-edge-core" "nexux_vcore" "proceso_26")
+          echo "[" > cloud_reports/cloud_audit_report.json
+          for i in "${!REPOS[@]}"; do
+            repo="${REPOS[$i]}"
+            response=$(curl -s -H "Authorization: token $GH_TOKEN" "https://api.github.com/repos/meni60116013-rgb/$repo")
+            name=$(echo "$response" | jq -r '.name // "not_found"')
+            size=$(echo "$response" | jq -r '.size // 0')
+            default_branch=$(echo "$response" | jq -r '.default_branch // "unknown"')
+            private=$(echo "$response" | jq -r '.private // false')
+            
+            echo "  {" >> cloud_reports/cloud_audit_report.json
+            echo "    \"name\": \"$name\"," >> cloud_reports/cloud_audit_report.json
+            echo "    \"size_kb\": $size," >> cloud_reports/cloud_audit_report.json
+            echo "    \"default_branch\": \"$default_branch\"," >> cloud_reports/cloud_audit_report.json
+            echo "    \"private\": $private" >> cloud_reports/cloud_audit_report.json
+            if [ $i -lt $(( ${#REPOS[@]} - 1 )) ]; then
+              echo "  }," >> cloud_reports/cloud_audit_report.json
+            else
+              echo "  }" >> cloud_reports/cloud_audit_report.json
+            fi
+          done
+          echo "]" >> cloud_reports/cloud_audit_report.json
+
+      - name: Upload Cloud Report Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: cloud-audit-report
+          path: cloud_reports/cloud_audit_report.json

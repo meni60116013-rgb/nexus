@@ -1,0 +1,28 @@
+{
+  "module": "VEHICLE_SYSTEMS_POWERTRAIN_PERFORMANCE",
+  "version": "1.0.0",
+  "inputs": {
+    "engineTorqueNm": "number",
+    "rpm": "number",
+    "gearRatio": "number",
+    "finalDriveRatio": "number",
+    "drivetrainEfficiency": "number",
+    "wheelRadiusM": "number",
+    "massKg": "number",
+    "aerodynamicForceN": "number",
+    "rollingResistanceN": "number",
+    "cgHeightM": "number",
+    "wheelbaseM": "number"
+  },
+  "outputs": {
+    "enginePowerW": "number",
+    "enginePowerKW": "number",
+    "wheelTorqueNm": "number",
+    "tractiveForceN": "number",
+    "accelerationMS2": "number",
+    "vehicleSpeedMS": "number",
+    "vehicleSpeedKPH": "number",
+    "powerToWeightWPerKg": "number",
+    "longitudinalLoadTransferN": "number"
+  }
+}

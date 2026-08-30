@@ -1,0 +1,22 @@
+{
+  "name": "vcore-sentinel",
+  "version": "1.0.0",
+  "description": "V-core Sentinel - 3D Motorcycle Engineering and Customization Suite",
+  "main": "index.js",
+  "scripts": {
+    "build": "mkdir -p dist && cp -r core client index.html assets dist/ 2>/dev/null || :",
+    "start": "npx serve dist"
+  },
+  "keywords": [
+    "motorcycle",
+    "engineering",
+    "3d",
+    "chassis",
+    "trellis"
+  ],
+  "author": "V-core Sentinel",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "serve": "^14.2.4"
+  }
+}

@@ -1,0 +1,338 @@
+[
+    {
+        "timestamp": "2026-08-20 09:07:29",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067113,
+        "gps_lon": -103.2744476,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:31",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067114,
+        "gps_lon": -103.2744469,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:34",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.706712,
+        "gps_lon": -103.2744466,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:35",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067122,
+        "gps_lon": -103.2744459,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:50",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067135,
+        "gps_lon": -103.2744434,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:52",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067132,
+        "gps_lon": -103.2744429,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:54",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.706712,
+        "gps_lon": -103.2744406,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:55",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067119,
+        "gps_lon": -103.2744408,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:57",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067116,
+        "gps_lon": -103.2744412,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:07:58",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.706711,
+        "gps_lon": -103.2744409,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:00",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067101,
+        "gps_lon": -103.2744389,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:06",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067066,
+        "gps_lon": -103.2744358,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:08",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067087,
+        "gps_lon": -103.2744367,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:12",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067076,
+        "gps_lon": -103.2744321,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:15",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067066,
+        "gps_lon": -103.274431,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:15",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7067066,
+        "gps_lon": -103.274431,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:21",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066992,
+        "gps_lon": -103.2744281,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:25",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066943,
+        "gps_lon": -103.2744255,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:27",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066961,
+        "gps_lon": -103.2744247,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:29",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066965,
+        "gps_lon": -103.2744251,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:31",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066982,
+        "gps_lon": -103.2744266,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:33",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066985,
+        "gps_lon": -103.2744267,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:35",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066962,
+        "gps_lon": -103.2744258,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:38",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066952,
+        "gps_lon": -103.2744272,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:40",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066959,
+        "gps_lon": -103.274428,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:42",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066955,
+        "gps_lon": -103.2744279,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:08:43",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066941,
+        "gps_lon": -103.2744258,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:09:01",
+        "tipo_pulso": "MAPEO_ESTRUCTURAL",
+        "gps_lat": 25.7066908,
+        "gps_lon": -103.2744335,
+        "orientacion_deg": 0,
+        "lectura_estructura": {
+            "distancia_m": 7.5,
+            "rumbo_brujula_deg": 0,
+            "frecuencia_hz": 18500
+        }
+    }
+]

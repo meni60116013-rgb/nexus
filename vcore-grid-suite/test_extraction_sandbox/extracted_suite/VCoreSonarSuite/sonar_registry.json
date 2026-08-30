@@ -1,0 +1,209 @@
+[
+    {
+        "timestamp": "2026-08-20 07:43:07",
+        "status": "success",
+        "message": "Pulso recibido y registrado por VCORE GRID SUITE",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:50:53",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:08",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:18",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:23",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:27",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:32",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:35",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:51:37",
+        "status": "success",
+        "message": "Escaneo de radar ejecutado y registrado",
+        "telemetry": "ONLINE",
+        "gps": "ACTIVO"
+    },
+    {
+        "timestamp": "2026-08-20 07:53:38",
+        "status": "success",
+        "latitude": 25.7067675,
+        "longitude": -103.2745732,
+        "accuracy": 21.589000701904297,
+        "message": "Datos de GPS real procesados y cruzados con \u00e9xito"
+    },
+    {
+        "timestamp": "2026-08-20 07:53:45",
+        "status": "success",
+        "latitude": 25.7067302,
+        "longitude": -103.2745257,
+        "accuracy": 4.327000141143799,
+        "message": "Datos de GPS real procesados y cruzados con \u00e9xito"
+    },
+    {
+        "timestamp": "2026-08-20 07:53:58",
+        "status": "success",
+        "latitude": 25.7066959,
+        "longitude": -103.2745125,
+        "accuracy": 3,
+        "message": "Datos de GPS real procesados y cruzados con \u00e9xito"
+    },
+    {
+        "timestamp": "2026-08-20 07:55:55",
+        "status": "success",
+        "latitude": 25.7066864,
+        "longitude": -103.2745278,
+        "accuracy": 6.699999809265137,
+        "target_rel_x": 230.72722341716315,
+        "target_rel_y": 161.44378686417392,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:56:03",
+        "status": "success",
+        "latitude": 25.7066884,
+        "longitude": -103.2745219,
+        "accuracy": 3,
+        "target_rel_x": 276.3938408723075,
+        "target_rel_y": 162.2221251863049,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:56:08",
+        "status": "success",
+        "latitude": 25.7066893,
+        "longitude": -103.2745213,
+        "accuracy": 3,
+        "target_rel_x": 137.9279605283711,
+        "target_rel_y": 323.6646848904367,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:56:12",
+        "status": "success",
+        "latitude": 25.7066905,
+        "longitude": -103.2745203,
+        "accuracy": 3,
+        "target_rel_x": 218.6748096650719,
+        "target_rel_y": 256.1770257837003,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:56:16",
+        "status": "success",
+        "latitude": 25.7066912,
+        "longitude": -103.2745193,
+        "accuracy": 3,
+        "target_rel_x": 284.48111726333474,
+        "target_rel_y": 167.16422212286255,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:56:20",
+        "status": "success",
+        "latitude": 25.7066913,
+        "longitude": -103.2745187,
+        "accuracy": 3,
+        "target_rel_x": 202.92663115886708,
+        "target_rel_y": 232.7303420189643,
+        "message": "Pulso y posici\u00f3n real registrados en rango de 10m"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:43",
+        "status": "success",
+        "latitude": 25.7066189,
+        "longitude": -103.2744327,
+        "accuracy": 4.629000186920166,
+        "delta_lat": 3.879999999867323e-05,
+        "delta_lon": -0.00011590000001149292,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:45",
+        "status": "success",
+        "latitude": 25.7066226,
+        "longitude": -103.2744379,
+        "accuracy": 3.930999994277954,
+        "delta_lat": 4.2499999999279225e-05,
+        "delta_lon": -0.00012110000000120635,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:46",
+        "status": "success",
+        "latitude": 25.7066248,
+        "longitude": -103.2744401,
+        "accuracy": 3.575000047683716,
+        "delta_lat": 4.4700000000119644e-05,
+        "delta_lon": -0.0001233000000127049,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:48",
+        "status": "success",
+        "latitude": 25.7066258,
+        "longitude": -103.2744413,
+        "accuracy": 3.121000051498413,
+        "delta_lat": 4.57000000011476e-05,
+        "delta_lon": -0.00012450000001251738,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:50",
+        "status": "success",
+        "latitude": 25.7066281,
+        "longitude": -103.2744437,
+        "accuracy": 3.0290000438690186,
+        "delta_lat": 4.7999999999603915e-05,
+        "delta_lon": -0.0001269000000121423,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    },
+    {
+        "timestamp": "2026-08-20 07:57:51",
+        "status": "success",
+        "latitude": 25.7066287,
+        "longitude": -103.2744443,
+        "accuracy": 3,
+        "delta_lat": 4.8599999999510146e-05,
+        "delta_lon": -0.0001275000000049431,
+        "message": "Pulso sincronizado con movimiento GPS real"
+    }
+]

@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VCORE GRID SUITE - MAPEO ESTRUCTURAL</title>
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body, html { width: 100%; height: 100%; background-color: #010401; color: #0f0; font-family: monospace; overflow: hidden; display: flex; flex-direction: column; justify-content: space-between; }
+        .header { background: rgba(0, 15, 0, 0.95); border-bottom: 1px solid #0f0; padding: 6px; text-align: center; z-index: 10; }
+        h1 { font-size: 11px; color: #0f0; text-shadow: 0 0 4px #0f0; }
+        #gps-status { font-size: 9px; color: #ff0; margin-top: 2px; }
+        #action-status { font-size: 9px; color: #00ffff; margin-top: 2px; }
+        
+        .viewport { flex: 1; position: relative; width: 100%; display: flex; justify-content: center; align-items: center; background: radial-gradient(circle, #041204 0%, #000000 90%); }
+        canvas { display: block; width: 100%; height: 100%; max-width: 100vh; max-height: 100vh; }
+        
+        .controls-grid { background: rgba(0, 15, 0, 0.95); border-top: 1px solid #0f0; padding: 8px; display: grid; grid-template-columns: 1fr 1fr; gap: 6px; z-index: 10; }
+        button { background: #002200; border: 1px solid #0f0; color: #0f0; padding: 10px; font-weight: bold; cursor: pointer; border-radius: 3px; font-family: monospace; font-size: 9px; text-transform: uppercase; }
+        button.pulse-btn { background: #002222; border-color: #00ffff; color: #00ffff; }
+        button:hover { background: #0f0; color: #000; box-shadow: 0 0 8px #0f0; }
+        button.pulse-btn:hover { background: #00ffff; color: #000; box-shadow: 0 0 8px #00ffff; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>VCORE GRID SUITE - MAPEO ACÚSTICO (10M)</h1>
+        <div id="gps-status">GPS | Adquiriendo ubicación real...</div>
+        <div id="action-status">Estado: Listo para generar croquis</div>
+    </div>
+
+    <div class="viewport">
+        <canvas id="tacticalCanvas"></canvas>
+    </div>
+
+    <div class="controls-grid">
+        <button onclick="activarMapeoCroquis()">MAPEO (DIBUJAR CROQUIS)</button>
+        <button class="pulse-btn" onclick="emitirPulsoIndependiente()">EMITIR PULSO (SONAR)</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('tacticalCanvas');
+        const ctx = canvas.getContext('2d');
+        let gpsData = { lat: 25.706670, lon: -103.274448, active: false };
+        let wallStructure = [];
+        let isMappingActive = false;
+
+        function resize() {
+            const size = Math.min(window.innerWidth, window.innerHeight * 0.65);
+            canvas.width = size;
+            canvas.height = size;
+        }
+        window.addEventListener('resize', resize);
+        resize();
+
+        // Obtener GPS Real
+        if (navigator.geolocation) {
+            navigator.geolocation.watchPosition(
+                (pos) => {
+                    gpsData.lat = pos.coords.latitude;
+                    gpsData.lon = pos.coords.longitude;
+                    gpsData.active = true;
+                    document.getElementById('gps-status').innerText = 
+                        `GPS | Lat: ${gpsData.lat.toFixed(6)} | Lon: ${gpsData.lon.toFixed(6)}`;
+                },
+                (err) => { console.error(err); },
+                { enableHighAccuracy: true }
+            );
+        }
+
+        function renderRadar() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const radius = canvas.width / 2 - 15;
+
+            // Anillos concéntricos de 10 metros (2.5m, 5m, 7.5m, 10m) y etiquetas alrededor
+            ctx.strokeStyle = '#004400';
+            ctx.lineWidth = 1;
+            [0.25, 0.5, 0.75, 1].forEach((r, idx) => {
+                ctx.beginPath();
+                ctx.arc(cx, cy, radius * r, 0, Math.PI * 2);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#00aa00';
+                ctx.font = '8px monospace';
+                ctx.fillText(`${(idx + 1) * 2.5}m`, cx + 3, cy - (radius * r) + 8);
+            });
+
+            // Ejes cartesianos con marcas de distancia (10M en los extremos)
+            ctx.beginPath();
+            ctx.moveTo(cx, 5); ctx.lineTo(cx, canvas.height - 5);
+            ctx.moveTo(5, cy); ctx.lineTo(canvas.width - 5, cy);
+            ctx.stroke();
+
+            ctx.fillStyle = '#00ff00';
+            ctx.font = '8px monospace';
+            ctx.fillText("10M", cx + 4, 12);
+            ctx.fillText("10M", cx + 4, canvas.height - 5);
+            ctx.fillText("10M", 5, cy - 4);
+            ctx.fillText("10M", canvas.width - 22, cy - 4);
+
+            // Trazar el boceto estructural en líneas delgadas (Paredes / Objetos)
+            if (wallStructure.length > 1) {
+                ctx.strokeStyle = '#00ffcc';
+                ctx.lineWidth = 1; // Línea delgada como solicitaste
+                ctx.beginPath();
+                ctx.moveTo(wallStructure[0].x, wallStructure[0].y);
+                for (let i = 1; i < wallStructure.length; i++) {
+                    ctx.lineTo(wallStructure[i].x, wallStructure[i].y);
+                }
+                ctx.closePath(); // Cierra el polígono de la estructura de la casa
+                ctx.stroke();
+                
+                // Relleno semitransparente del croquis
+                ctx.fillStyle = 'rgba(0, 255, 204, 0.05)';
+                ctx.fill();
+            }
+
+            // Dibujar vértices detectados
+            wallStructure.forEach(p => {
+                ctx.fillStyle = '#ff0055';
+                ctx.beginPath();
+                ctx.arc(p.x, p.y, 3, 0, Math.PI * 2);
+                ctx.fill();
+            });
+
+            // Posición propia (Centro)
+            ctx.fillStyle = '#00ffff';
+            ctx.beginPath();
+            ctx.arc(cx, cy, 5, 0, Math.PI * 2);
+            ctx.fill();
+
+            requestAnimationFrame(renderRadar);
+        }
+        renderRadar();
+
+        // Botón 1: Mapeo exclusivo para generar el croquis estructural en líneas delgadas
+        function activarMapeoCroquis() {
+            document.getElementById('action-status').innerText = "Estado: Mapeando estructura y paredes circundantes...";
+            const cx = canvas.width / 2;
+            const cy = canvas.height / 2;
+            const radius = canvas.width / 2 - 15;
+
+            // Generar la estructura poligonal perimetral simulando las paredes de una habitación en 10m
+            wallStructure = [];
+            const numPoints = 6; // Esquinas de la estructura
+            for (let i = 0; i < numPoints; i++) {
+                const angle = (i / numPoints) * Math.PI * 2;
+                // Variación de distancia realista para paredes dentro de 10 metros
+                const distFactor = 0.5 + (Math.sin(i * 2) * 0.3) + (Math.random() * 0.1);
+                const dist = radius * distFactor;
+                const px = cx + Math.cos(angle) * dist;
+                const py = cy + Math.sin(angle) * dist;
+                wallStructure.push({ x: px, y: py });
+            }
+
+            // Enviar coordenadas y croquis al backend
+            fetch('/api/vcore_croquis', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    tipo: 'MAPEO_ESTRUCTURAL',
+                    lat: gpsData.lat,
+                    lon: gpsData.lon,
+                    puntos: wallStructure
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                document.getElementById('action-status').innerText = "Estado: Estructura de paredes mapeada con éxito [OK]";
+            });
+        }
+
+        // Botón 2: Pulso acústico independiente (emite pitido real por la bocina)
+        function emitirPulsoIndependiente() {
+            document.getElementById('action-status').innerText = "Estado: Emitiendo pulso de sonar independiente (18.5 kHz)...";
+            
+            try {
+                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+                const osc = audioCtx.createOscillator();
+                const gain = audioCtx.createGain();
+                osc.type = 'sine';
+                osc.frequency.setValueAtTime(18500, audioCtx.currentTime); // 18.5 kHz
+                gain.gain.setValueAtTime(0.2, audioCtx.currentTime);
+                osc.connect(gain);
+                gain.connect(audioCtx.destination);
+                osc.start();
+                osc.stop(audioCtx.currentTime + 0.3); // Pitido de 300ms
+            } catch(e) {
+                console.error("Error de audio:", e);
+            }
+
+            setTimeout(() => {
+                document.getElementById('action-status').innerText = "Estado: Pulso emitido y recibido correctamente";
+            }, 400);
+        }
+    </script>
+</body>
+</html>

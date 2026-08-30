@@ -1,0 +1,31 @@
+# Git ignore file for V-core Nexux
+
+# Keystore (nunca subir a Git)
+app/release.keystore
+keystore.b64
+
+# Build output
+build/
+.gradle/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Gradle
+.gradle
+gradlew
+gradlew.bat
+gradle/
+
+# Misc
+*.log
+*.orig
+release.jks

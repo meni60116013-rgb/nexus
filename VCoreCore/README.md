@@ -1,0 +1,1 @@
+# VCoreCore - núcleo base

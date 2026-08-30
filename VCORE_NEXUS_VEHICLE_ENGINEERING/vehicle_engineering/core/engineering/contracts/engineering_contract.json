@@ -1,0 +1,30 @@
+{
+  "module": "ENGINEERING_ENGINE",
+  "version": "1.0.0",
+  "domains": [
+    "MASS",
+    "CENTER_OF_GRAVITY",
+    "GEOMETRY",
+    "STATIC_AXLE_LOAD",
+    "VALIDATION"
+  ],
+  "inputs": [
+    "components",
+    "frontAxleXM",
+    "rearAxleXM",
+    "wheelRadiusFrontM",
+    "wheelRadiusRearM",
+    "groundClearanceM",
+    "cgHeightM"
+  ],
+  "outputs": [
+    "totalMassKg",
+    "centerOfGravity",
+    "wheelbaseM",
+    "frontMassKg",
+    "rearMassKg",
+    "frontLoadFraction",
+    "rearLoadFraction",
+    "validation"
+  ]
+}

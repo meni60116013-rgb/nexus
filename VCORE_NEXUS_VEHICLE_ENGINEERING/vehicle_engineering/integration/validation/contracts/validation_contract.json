@@ -1,0 +1,22 @@
+{
+  "module": "VALIDATION_ORCHESTRATOR",
+  "version": "1.0.0",
+  "input": "VCORE_ENGINEERING_SNAPSHOT",
+  "output": "VALIDATION_REPORT",
+  "checks": [
+    "schema",
+    "vehicle identity",
+    "mass",
+    "center of gravity",
+    "geometry",
+    "systems",
+    "performance"
+  ],
+  "rules": [
+    "Validation does not duplicate physics.",
+    "Specialized engines remain authoritative.",
+    "Invalid snapshots must not pass validation.",
+    "Valid snapshots produce deterministic reports.",
+    "No local compilation is performed."
+  ]
+}

@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>VCORE NEXUS — Vehicle Creator</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="app">
+    <header class="header">
+      <div>
+        <span class="eyebrow">VCORE NEXUS</span>
+        <h1>Vehicle Creator</h1>
+      </div>
+      <span id="validationBadge" class="badge">READY</span>
+    </header>
+
+    <section class="card">
+      <h2>Vehicle Identity</h2>
+
+      <label>
+        Name
+        <input id="vehicleName"
+               type="text"
+               value="Nexus Motorcycle">
+      </label>
+
+      <label>
+        Type
+        <select id="vehicleType">
+          <option value="motorcycle">Motorcycle</option>
+          <option value="scooter">Scooter</option>
+          <option value="micromobility">Micromobility</option>
+        </select>
+      </label>
+    </section>
+
+    <section class="card">
+      <h2>Geometry</h2>
+
+      <div class="grid">
+        <label>
+          Wheelbase (m)
+          <input id="wheelbase"
+                 type="number"
+                 value="1.4"
+                 step="0.01"
+                 min="0.1">
+        </label>
+
+        <label>
+          Ground clearance (m)
+          <input id="groundClearance"
+                 type="number"
+                 value="0.16"
+                 step="0.01"
+                 min="0">
+        </label>
+
+        <label>
+          Front wheel radius (m)
+          <input id="frontRadius"
+                 type="number"
+                 value="0.30"
+                 step="0.01"
+                 min="0.05">
+        </label>
+
+        <label>
+          Rear wheel radius (m)
+          <input id="rearRadius"
+                 type="number"
+                 value="0.31"
+                 step="0.01"
+                 min="0.05">
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Mass / Center of Gravity</h2>
+
+      <div class="grid">
+        <label>
+          Total mass (kg)
+          <input id="mass"
+                 type="number"
+                 value="200"
+                 step="1"
+                 min="1">
+        </label>
+
+        <label>
+          CG X from front axle (m)
+          <input id="cgX"
+                 type="number"
+                 value="0.61"
+                 step="0.01"
+                 min="0">
+        </label>
+
+        <label>
+          CG height (m)
+          <input id="cgHeight"
+                 type="number"
+                 value="0.45"
+                 step="0.01"
+                 min="0.01">
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Powertrain</h2>
+
+      <div class="grid">
+        <label>
+          Torque (Nm)
+          <input id="torque"
+                 type="number"
+                 value="50"
+                 step="1"
+                 min="0.1">
+        </label>
+
+        <label>
+          RPM
+          <input id="rpm"
+                 type="number"
+                 value="6000"
+                 step="100"
+                 min="1">
+        </label>
+
+        <label>
+          Gear ratio
+          <input id="gear"
+                 type="number"
+                 value="2"
+                 step="0.01"
+                 min="0.01">
+        </label>
+
+        <label>
+          Final drive
+          <input id="finalDrive"
+                 type="number"
+                 value="3"
+                 step="0.01"
+                 min="0.01">
+        </label>
+
+        <label>
+          Drivetrain efficiency
+          <input id="efficiency"
+                 type="number"
+                 value="0.9"
+                 step="0.01"
+                 min="0.01"
+                 max="1">
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Engineering Summary</h2>
+
+      <div class="metrics">
+        <div>
+          <span>Power</span>
+          <strong id="power">—</strong>
+        </div>
+        <div>
+          <span>Wheel torque</span>
+          <strong id="wheelTorque">—</strong>
+        </div>
+        <div>
+          <span>Acceleration</span>
+          <strong id="acceleration">—</strong>
+        </div>
+        <div>
+          <span>Speed</span>
+          <strong id="speed">—</strong>
+        </div>
+        <div>
+          <span>Front load</span>
+          <strong id="frontLoad">—</strong>
+        </div>
+        <div>
+          <span>Rear load</span>
+          <strong id="rearLoad">—</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="actions">
+      <button id="calculate">CALCULATE</button>
+      <button id="save" class="secondary">SAVE MODEL</button>
+      <button id="export" class="secondary">EXPORT JSON</button>
+    </section>
+
+    <pre id="output" class="output"></pre>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

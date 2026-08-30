@@ -1,0 +1,333 @@
+[
+    {
+        "timestamp": "2026-08-20 08:57:18",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.706704,
+        "gps_lon": -103.274509,
+        "gps_accuracy": 3.010999917984009,
+        "datos_cruzados": {
+            "distancia_estimada_m": 4.118134175619978,
+            "angulo_grados": 77.66857212701603,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:20",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067035,
+        "gps_lon": -103.2745037,
+        "gps_accuracy": 3.003999948501587,
+        "datos_cruzados": {
+            "distancia_estimada_m": 7.195389415744887,
+            "angulo_grados": 319.5041047839921,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:22",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067033,
+        "gps_lon": -103.2745011,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 6.5776493254653055,
+            "angulo_grados": 359.3836128362037,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:23",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067027,
+        "gps_lon": -103.2744961,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 6.804054070186351,
+            "angulo_grados": 57.84839000956221,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:25",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067025,
+        "gps_lon": -103.2744916,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 4.700098782192217,
+            "angulo_grados": 211.8498063139411,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:27",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067025,
+        "gps_lon": -103.2744895,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 5.4209637270511895,
+            "angulo_grados": 278.1611631433767,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:28",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067025,
+        "gps_lon": -103.2744875,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 5.964785368084069,
+            "angulo_grados": 52.03053333669286,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:29",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067023,
+        "gps_lon": -103.2744841,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 4.9781680159003905,
+            "angulo_grados": 242.8026920234627,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:31",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067024,
+        "gps_lon": -103.2744821,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 6.670045355809721,
+            "angulo_grados": 133.40455415629845,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:32",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067024,
+        "gps_lon": -103.2744803,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 6.265714734379319,
+            "angulo_grados": 271.4612265333868,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:42",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "RANGO_FRECUENCIAS",
+        "gps_lat": 25.7067033,
+        "gps_lon": -103.2744684,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 5.2507331487116025,
+            "angulo_grados": 268.83920358315015,
+            "frecuencia_hz": 2400000000
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:43",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "RANGO_FRECUENCIAS",
+        "gps_lat": 25.7067032,
+        "gps_lon": -103.2744674,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 7.711248260267022,
+            "angulo_grados": 7.145208218153965,
+            "frecuencia_hz": 2400000000
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:44",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "RANGO_FRECUENCIAS",
+        "gps_lat": 25.7067032,
+        "gps_lon": -103.274467,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 4.179436393576502,
+            "angulo_grados": 142.9927098457299,
+            "frecuencia_hz": 2400000000
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:45",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067031,
+        "gps_lon": -103.2744665,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 7.544477425975288,
+            "angulo_grados": 335.91553667933516,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:47",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067031,
+        "gps_lon": -103.2744663,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 8.67476921214039,
+            "angulo_grados": 340.9514624585836,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:47",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067029,
+        "gps_lon": -103.274466,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 7.475641409630223,
+            "angulo_grados": 118.89882064907017,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:49",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067029,
+        "gps_lon": -103.2744655,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 8.400981641823925,
+            "angulo_grados": 283.12693575327404,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:49",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067028,
+        "gps_lon": -103.2744654,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 5.457992655517789,
+            "angulo_grados": 121.14143999500877,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 08:57:50",
+        "module": "VCORE GRID SUITE - SONAR T\u00c1CTICO",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067028,
+        "gps_lon": -103.2744652,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_estimada_m": 4.117047167196696,
+            "angulo_grados": 205.35715223800915,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:34",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067118,
+        "gps_lon": -103.2744434,
+        "gps_accuracy": 4.798999786376953,
+        "datos_cruzados": {
+            "distancia_m": 3.87,
+            "angulo_deg": 342.4,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:37",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067089,
+        "gps_lon": -103.2744425,
+        "gps_accuracy": 3.8949999809265137,
+        "datos_cruzados": {
+            "distancia_m": 6.23,
+            "angulo_deg": 38.7,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:38",
+        "tipo_pulso": "PULSO_MAPEO",
+        "gps_lat": 25.7067099,
+        "gps_lon": -103.2744452,
+        "gps_accuracy": 3.752000093460083,
+        "datos_cruzados": {
+            "distancia_m": 6.04,
+            "angulo_deg": 219.1,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:41",
+        "tipo_pulso": "RANGOS_FRECUENCIA",
+        "gps_lat": 25.7067094,
+        "gps_lon": -103.2744443,
+        "gps_accuracy": 3.4189999103546143,
+        "datos_cruzados": {
+            "distancia_m": 6.37,
+            "angulo_deg": 326,
+            "frecuencia_hz": 2400000000
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:42",
+        "tipo_pulso": "RANGOS_FRECUENCIA",
+        "gps_lat": 25.7067093,
+        "gps_lon": -103.2744442,
+        "gps_accuracy": 3.3570001125335693,
+        "datos_cruzados": {
+            "distancia_m": 7.41,
+            "angulo_deg": 297.6,
+            "frecuencia_hz": 2400000000
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:45",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067092,
+        "gps_lon": -103.2744439,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_m": 5.89,
+            "angulo_deg": 204,
+            "frecuencia_hz": 18500
+        }
+    },
+    {
+        "timestamp": "2026-08-20 09:00:47",
+        "tipo_pulso": "DATOS_CRUZADOS",
+        "gps_lat": 25.7067092,
+        "gps_lon": -103.274444,
+        "gps_accuracy": 3,
+        "datos_cruzados": {
+            "distancia_m": 6.35,
+            "angulo_deg": 322.9,
+            "frecuencia_hz": 18500
+        }
+    }
+]

@@ -1,0 +1,346 @@
+[
+    {
+        "timestamp": "2026-08-20 08:08:31",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067695,
+        "device_longitude": -103.2744231,
+        "accuracy_m": 15.065999984741211,
+        "scanned_band": "Celular GSM/4G/5G [850MHz - 2.6GHz]",
+        "detected_echoes": [
+            {
+                "x": 298.37547394226135,
+                "y": 157.92891283270686,
+                "distance": 5.872322833639833
+            },
+            {
+                "x": 102.79413616828639,
+                "y": 295.05506255915105,
+                "distance": 7.312468044249963
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:36",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067189,
+        "device_longitude": -103.274432,
+        "accuracy_m": 5.729000091552734,
+        "scanned_band": "Ultrasonido / Ac\u00fastico [20 - 48 kHz]",
+        "detected_echoes": [
+            {
+                "x": 73.6656019745314,
+                "y": 252.99805846922297,
+                "distance": 7.255970149742329
+            },
+            {
+                "x": 182.51510355032815,
+                "y": 184.3080321566305,
+                "distance": 0.9595600125597469
+            },
+            {
+                "x": 243.90492685261535,
+                "y": 288.8915919714772,
+                "distance": 5.619174666503934
+            },
+            {
+                "x": 226.06737180928894,
+                "y": 182.07970152517325,
+                "distance": 1.7813650734413025
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:40",
+        "status": "croquis_updated",
+        "device_latitude": 25.706714,
+        "device_longitude": -103.274428,
+        "accuracy_m": 3.687999963760376,
+        "scanned_band": "Electromagn\u00e9tico LF [30 - 300 Hz]",
+        "detected_echoes": [
+            {
+                "x": 269.28378534181826,
+                "y": 164.51983296140722,
+                "distance": 4.2881236822005935
+            },
+            {
+                "x": 213.6379826204655,
+                "y": 228.18293388962093,
+                "distance": 1.9730814100035658
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:42",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067118,
+        "device_longitude": -103.2744282,
+        "accuracy_m": 3,
+        "scanned_band": "Wi-Fi / Bluetooth [2.4 - 5 GHz]",
+        "detected_echoes": [
+            {
+                "x": 245.82412597629124,
+                "y": 205.8912527431296,
+                "distance": 2.730992505716335
+            },
+            {
+                "x": 180.77125231711713,
+                "y": 305.68863594616727,
+                "distance": 5.953803253958063
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:45",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067103,
+        "device_longitude": -103.2744281,
+        "accuracy_m": 3,
+        "scanned_band": "Celular GSM/4G/5G [850MHz - 2.6GHz]",
+        "detected_echoes": [
+            {
+                "x": 198.1211640228106,
+                "y": 140.6774423932332,
+                "distance": 2.9765165187974145
+            },
+            {
+                "x": 180.09572687820219,
+                "y": 62.373755933212976,
+                "distance": 7.234913097662197
+            },
+            {
+                "x": 319.567928733873,
+                "y": 250.38379441806842,
+                "distance": 7.258389102038485
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:47",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067094,
+        "device_longitude": -103.2744284,
+        "accuracy_m": 3,
+        "scanned_band": "Ultrasonido / Ac\u00fastico [20 - 48 kHz]",
+        "detected_echoes": [
+            {
+                "x": 293.3692528057867,
+                "y": 232.99902950586772,
+                "distance": 5.600101676896138
+            },
+            {
+                "x": 197.62578293407742,
+                "y": 196.01532085933053,
+                "distance": 0.0874115656945324
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:49",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067085,
+        "device_longitude": -103.2744291,
+        "accuracy_m": 3,
+        "scanned_band": "Electromagn\u00e9tico LF [30 - 300 Hz]",
+        "detected_echoes": [
+            {
+                "x": 191.03555566220692,
+                "y": 198.41452637946804,
+                "distance": 0.2967997360258013
+            },
+            {
+                "x": 208.1012056415325,
+                "y": 187.32855312086238,
+                "distance": 0.800395123251718
+            },
+            {
+                "x": 198.17609308118608,
+                "y": 322.3383787653322,
+                "distance": 6.793393453813051
+            },
+            {
+                "x": 190.89995360523352,
+                "y": 192.98616009690338,
+                "distance": 0.3184942978000524
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:51",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067081,
+        "device_longitude": -103.2744293,
+        "accuracy_m": 3,
+        "scanned_band": "Wi-Fi / Bluetooth [2.4 - 5 GHz]",
+        "detected_echoes": [
+            {
+                "x": 139.85339394598776,
+                "y": 151.1934727477594,
+                "distance": 3.8620215678079
+            },
+            {
+                "x": 191.99117568968092,
+                "y": 171.83338112394657,
+                "distance": 1.3170354733274046
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:52",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067078,
+        "device_longitude": -103.2744294,
+        "accuracy_m": 3,
+        "scanned_band": "Celular GSM/4G/5G [850MHz - 2.6GHz]",
+        "detected_echoes": [
+            {
+                "x": 175.8472451884253,
+                "y": 201.62728734437178,
+                "distance": 1.1249283958039868
+            },
+            {
+                "x": 197.72638822302025,
+                "y": 211.63938254201875,
+                "distance": 0.8459343891388873
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:52",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067075,
+        "device_longitude": -103.2744294,
+        "accuracy_m": 3,
+        "scanned_band": "Ultrasonido / Ac\u00fastico [20 - 48 kHz]",
+        "detected_echoes": [
+            {
+                "x": 238.41702878915433,
+                "y": 140.21057455283542,
+                "distance": 3.767917584339458
+            },
+            {
+                "x": 92.08877165477973,
+                "y": 168.5599808665592,
+                "distance": 5.778131360423936
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:53",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067073,
+        "device_longitude": -103.2744294,
+        "accuracy_m": 3,
+        "scanned_band": "Electromagn\u00e9tico LF [30 - 300 Hz]",
+        "detected_echoes": [
+            {
+                "x": 334.8902856080936,
+                "y": 258.39919824512765,
+                "distance": 8.186209314735006
+            },
+            {
+                "x": 302.50861741462313,
+                "y": 219.43693853942787,
+                "distance": 5.863266363474903
+            },
+            {
+                "x": 298.3173762238171,
+                "y": 237.07206526734367,
+                "distance": 5.927589425948959
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:56",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067065,
+        "device_longitude": -103.2744298,
+        "accuracy_m": 3,
+        "scanned_band": "Wi-Fi / Bluetooth [2.4 - 5 GHz]",
+        "detected_echoes": [
+            {
+                "x": 182.23153267009553,
+                "y": 241.36373081238972,
+                "distance": 2.548772012712713
+            },
+            {
+                "x": 105.17050712554442,
+                "y": 213.77860165276263,
+                "distance": 4.975972866447492
+            },
+            {
+                "x": 101.99916134670218,
+                "y": 305.24895090265215,
+                "distance": 7.74855805100115
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:08:59",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067058,
+        "device_longitude": -103.2744304,
+        "accuracy_m": 3,
+        "scanned_band": "Celular GSM/4G/5G [850MHz - 2.6GHz]",
+        "detected_echoes": [
+            {
+                "x": 203.6272730730726,
+                "y": 196.61388257481994,
+                "distance": 0.411394485182628
+            },
+            {
+                "x": 77.53736839088457,
+                "y": 113.0745302806804,
+                "distance": 7.774355025897522
+            },
+            {
+                "x": 174.73358719779878,
+                "y": 250.17693820490865,
+                "distance": 3.1291065960999767
+            },
+            {
+                "x": 98.66517724186438,
+                "y": 316.511209471105,
+                "distance": 8.328479219197018
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    },
+    {
+        "timestamp": "2026-08-20 08:09:05",
+        "status": "croquis_updated",
+        "device_latitude": 25.7067055,
+        "device_longitude": -103.2744318,
+        "accuracy_m": 3,
+        "scanned_band": "Ultrasonido / Ac\u00fastico [20 - 48 kHz]",
+        "detected_echoes": [
+            {
+                "x": 114.19362028718422,
+                "y": 270.3549034273651,
+                "distance": 5.943459127299432
+            },
+            {
+                "x": 129.0393212194233,
+                "y": 162.9946228134996,
+                "distance": 4.013608278158973
+            },
+            {
+                "x": 67.88876251267348,
+                "y": 259.1412835984657,
+                "distance": 7.678825596528478
+            }
+        ],
+        "message": "Pulso de rebote integrado al croquis estructural"
+    }
+]

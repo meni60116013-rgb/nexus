@@ -1,0 +1,42 @@
+{
+  "module": "VCORE_NEXUS_VEHICLE_INTEGRATION",
+  "version": "1.0.0",
+  "purpose": "Connect universal Vehicle Core with Vehicle Engineering Foundation without duplicating engineering engines.",
+  "vehicleIdentity": [
+    "id",
+    "name",
+    "type",
+    "version"
+  ],
+  "vehicleConfiguration": [
+    "mass",
+    "geometry",
+    "structure",
+    "systems",
+    "powertrain"
+  ],
+  "engineeringOutputs": [
+    "totalMassKg",
+    "centerOfGravity",
+    "geometry",
+    "validation"
+  ],
+  "performanceOutputs": [
+    "enginePowerW",
+    "enginePowerKW",
+    "wheelTorqueNm",
+    "tractiveForceN",
+    "accelerationMS2",
+    "vehicleSpeedMS",
+    "vehicleSpeedKPH",
+    "powerToWeightWPerKg",
+    "longitudinalLoadTransferN"
+  ],
+  "rules": [
+    "Vehicle Core owns universal vehicle identity and configuration.",
+    "Engineering engines remain specialized calculation modules.",
+    "Motorcycle Core is a vehicle configuration, not a duplicate Vehicle Core.",
+    "Integration layer must not duplicate engineering calculations.",
+    "Heavy compilation remains remote in GitHub Actions."
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "module": "UNIVERSAL_ENGINEERING_SNAPSHOT",
+  "version": "1.0.0",
+  "required": [
+    "vehicle",
+    "engineering.mass",
+    "engineering.centerOfGravity",
+    "engineering.geometry",
+    "systems",
+    "performance"
+  ],
+  "domains": [
+    "vehicle.identity",
+    "mass",
+    "centerOfGravity",
+    "geometry",
+    "wheels",
+    "suspension",
+    "brakes",
+    "powertrain",
+    "performance"
+  ],
+  "rules": [
+    "Snapshot is an integration representation.",
+    "Snapshot does not duplicate physics.",
+    "Specialized engines remain authoritative.",
+    "Vehicle Core remains universal.",
+    "Motorcycle Core remains vehicle specialization.",
+    "Vehicle Systems remains configuration authority.",
+    "Heavy compilation occurs only in GitHub Actions."
+  ]
+}
