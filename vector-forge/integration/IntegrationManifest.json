@@ -1,0 +1,11 @@
+{
+  "name": "VECTOR-FORGE",
+  "version": "1.0.0",
+  "pipeline": {
+    "block1": "core-engine",
+    "block2": "contracts",
+    "block3": "integration"
+  },
+  "buildAuthority": "github-actions",
+  "localCompilation": false
+}

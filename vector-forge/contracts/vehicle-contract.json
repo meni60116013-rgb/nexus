@@ -1,0 +1,10 @@
+{
+  "schema": "vcore.vehicle.v1",
+  "required": ["id", "type", "timestamp"],
+  "properties": {
+    "id": "string",
+    "type": "string",
+    "timestamp": "number",
+    "metadata": "object"
+  }
+}
