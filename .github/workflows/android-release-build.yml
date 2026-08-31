@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - './HiddenSignal/**'
+      - 'repo/**'
 
 jobs:
   build-and-sign:
@@ -17,9 +17,9 @@ jobs:
           distribution: temurin
           java-version: '17'
       - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > ./HiddenSignal/release.keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > repo/release.keystore
       - name: Build release APK
-        working-directory: ./HiddenSignal
+        working-directory: repo
         run: |
           chmod +x gradlew
           ./gradlew assembleRelease \
@@ -31,4 +31,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vector-forge-release-apk
-          path: ./HiddenSignal/app/build/outputs/apk/release/*.apk
+          path: repo/app/build/outputs/apk/release/*.apk
