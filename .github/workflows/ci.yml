@@ -20,7 +20,7 @@ jobs:
           set -e
           echo "VECTOR-FORGE CI"
           test -f README.md
-          test -d core
-          test -d apps
-          test -d tests
+          test -d vector-forge
+          test -d vector-forge
+          test -d vector-forge/tests
           echo "VALIDATION: PASS"
