@@ -5,7 +5,7 @@ on:
   push:
     branches: [main]
     paths:
-      - 'repo/**'
+      - 'factory-engine-suite/**'
 
 jobs:
   build-and-sign:
@@ -16,13 +16,16 @@ jobs:
         with:
           distribution: temurin
           java-version: '17'
+      - name: Verify gradlew exists
+        working-directory: factory-engine-suite
+        run: ls -la gradlew
       - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > repo/release.keystore
-      - name: Build release APK
-        working-directory: repo
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > factory-engine-suite/release.keystore
+      - name: Build release APK (app module only)
+        working-directory: factory-engine-suite
         run: |
           chmod +x gradlew
-          ./gradlew assembleRelease \
+          ./gradlew :app:assembleRelease \
             -Pandroid.injected.signing.store.file=release.keystore \
             -Pandroid.injected.signing.store.password="${{ secrets.KEYSTORE_PASSWORD }}" \
             -Pandroid.injected.signing.key.alias="${{ secrets.KEY_ALIAS }}" \
@@ -31,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: vector-forge-release-apk
-          path: repo/app/build/outputs/apk/release/*.apk
+          path: factory-engine-suite/app/build/outputs/apk/release/*.apk
