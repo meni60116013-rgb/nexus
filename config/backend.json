@@ -1,0 +1,4 @@
+{
+  "backend_url": "https://TU-SUBDOMINIO.onrender.com",
+  "nota": "Reemplaza con la URL real de Switch Vico Nexus ya desplegado. La app Android consulta este backend por HTTP, no lo compila localmente."
+}
