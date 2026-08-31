@@ -1,0 +1,26 @@
+name: VECTOR-FORGE CI
+
+on:
+  push:
+    branches: ["main"]
+  pull_request:
+    branches: ["main"]
+  workflow_dispatch:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Repository validation
+        run: |
+          set -e
+          echo "VECTOR-FORGE CI"
+          test -f README.md
+          test -d core
+          test -d apps
+          test -d tests
+          echo "VALIDATION: PASS"
