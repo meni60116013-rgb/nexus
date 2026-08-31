@@ -1,0 +1,61 @@
+name: VECTOR-FORGE Final Gate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'vector-forge/**'
+      - '.github/workflows/**'
+
+jobs:
+  final-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Static integration gate
+        run: |
+          set -e
+          test -f vector-forge/core-engine/build.gradle.kts
+          test -f vector-forge/contracts/vehicle-contract.json
+          test -f vector-forge/integration/IntegrationManifest.json
+          test -f vector-forge/vehicle-core/VehicleCoreManifest.json
+          test -f vector-forge/frame-chassis/FrameChassisManifest.json
+          test -f vector-forge/suspension-dynamics/SuspensionDynamicsManifest.json
+          test -f vector-forge/powertrain/PowertrainManifest.json
+          test -f vector-forge/engineering/EngineeringManifest.json
+          test -f vector-forge/vehicle-creator/VehicleCreatorManifest.json
+          test -f vector-forge/demonstrator/DemonstratorManifest.json
+          test -f vector-forge/release/ReleaseManifest.json
+
+      - name: Integration gates
+        working-directory: vector-forge/tests
+        run: |
+          ./block03-gate.sh
+          ./block04-gate.sh
+          ./block05-gate.sh
+          ./block06-gate.sh
+          ./block07-gate.sh
+          ./block08-gate.sh
+          ./block09-gate.sh
+          ./block10-gate.sh
+          ./block11-gate.sh
+
+      - name: Core Engine build and tests
+        working-directory: vector-forge/core-engine
+        run: gradle test --no-daemon
+
+      - name: Final inventory
+        run: |
+          echo "===== VECTOR-FORGE FINAL INVENTORY ====="
+          find vector-forge -type f \
+            -not -path '*/build/*' \
+            -not -path '*/.gradle/*' | sort

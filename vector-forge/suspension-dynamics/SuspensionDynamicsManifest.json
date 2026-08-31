@@ -1,0 +1,7 @@
+{
+  "block": 6,
+  "name": "Suspension Dynamics Engine",
+  "status": "implemented",
+  "inputs": ["vehicle-core", "frame-chassis"],
+  "domains": ["suspension", "forces", "weight-transfer", "lateral-load"]
+}

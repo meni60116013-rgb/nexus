@@ -1,0 +1,13 @@
+{
+  "block": 9,
+  "name": "Vehicle Creator UI",
+  "status": "implemented",
+  "mode": "thin-client",
+  "consumes": [
+    "vehicle-core",
+    "frame-chassis",
+    "suspension-dynamics",
+    "powertrain",
+    "engineering"
+  ]
+}

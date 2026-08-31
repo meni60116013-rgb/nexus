@@ -1,0 +1,7 @@
+{
+  "block": 3,
+  "name": "Integration Foundation",
+  "status": "implemented",
+  "dependsOn": ["block-1-core-engine", "block-2-contracts"],
+  "buildAuthority": "github-actions"
+}

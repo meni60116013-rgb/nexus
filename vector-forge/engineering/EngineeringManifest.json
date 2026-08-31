@@ -1,0 +1,16 @@
+{
+  "block": 8,
+  "name": "Engineering Engine",
+  "status": "implemented",
+  "domains": [
+    "materials",
+    "structural-analysis",
+    "mechanical-calculation",
+    "manufacturing"
+  ],
+  "materials": [
+    "CROMOLY_4130",
+    "ACERO_CARBONO_1018",
+    "ACERO_CARBONO_1020"
+  ]
+}

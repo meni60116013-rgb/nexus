@@ -1,0 +1,13 @@
+{
+  "block": 10,
+  "name": "First Demonstrator",
+  "status": "implemented",
+  "pipeline": [
+    "vehicle-definition",
+    "frame-definition",
+    "dynamics-definition",
+    "powertrain-definition",
+    "engineering-validation",
+    "creator-output"
+  ]
+}

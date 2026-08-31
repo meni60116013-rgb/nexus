@@ -1,0 +1,7 @@
+{
+  "block": 7,
+  "name": "Powertrain Performance Engine",
+  "status": "implemented",
+  "domains": ["power", "torque", "performance", "vehicle-response"],
+  "inputs": ["vehicle-core", "suspension-dynamics"]
+}

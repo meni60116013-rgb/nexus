@@ -1,0 +1,17 @@
+{
+  "block": 11,
+  "name": "Release Integration Gate",
+  "status": "implemented",
+  "requirements": {
+    "contracts": true,
+    "core-engine": true,
+    "vehicle-core": true,
+    "frame-chassis": true,
+    "suspension-dynamics": true,
+    "powertrain": true,
+    "engineering": true,
+    "vehicle-creator": true,
+    "demonstrator": true
+  },
+  "releaseAuthority": "github-actions"
+}
