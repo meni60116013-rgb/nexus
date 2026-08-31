@@ -24,13 +24,17 @@ jobs:
           gradle-version: '8.4'
 
       - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > repo/release.keystore
+        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > repo/app/release.keystore
+      - name: Verify keystore is not empty
+        run: |
+          ls -la repo/app/release.keystore
+          if [ ! -s repo/app/release.keystore ]; then echo "::error::KEYSTORE_BASE64 secret está vacío o mal configurado"; exit 1; fi
 
       - name: Build release APK (app module only)
         working-directory: repo
         run: |
           gradle :app:assembleRelease \
-            -Pandroid.injected.signing.store.file=release.keystore \
+            -Pandroid.injected.signing.store.file=repo/app/release.keystore \
             -Pandroid.injected.signing.store.password="${{ secrets.KEYSTORE_PASSWORD }}" \
             -Pandroid.injected.signing.key.alias="${{ secrets.KEY_ALIAS }}" \
             -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
