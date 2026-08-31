@@ -1,0 +1,39 @@
+name: VECTOR-FORGE Master Gate
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'vector-forge/**'
+      - '.github/workflows/**'
+
+jobs:
+  master-gate:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Static structure gate
+        run: |
+          test -d vector-forge
+          test -f vector-forge/core-engine/build.gradle.kts
+          find vector-forge -type f | sort
+
+      - name: Core Engine tests
+        working-directory: vector-forge/core-engine
+        run: gradle test --no-daemon
+
+      - name: Final inventory
+        run: |
+          echo "===== VECTOR-FORGE FINAL INVENTORY ====="
+          find vector-forge -type f \
+            -not -path '*/build/*' \
+            -not -path '*/.gradle/*' | sort
