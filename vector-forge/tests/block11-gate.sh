@@ -1,18 +1,19 @@
 #!/usr/bin/env bash
+ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 set -Eeuo pipefail
 
-test -f ../release/ReleaseManifest.json
+test -f $ROOT/release/ReleaseManifest.json
 
 for f in \
-  ../contracts/vehicle-contract.json \
-  ../integration/IntegrationManifest.json \
-  ../vehicle-core/VehicleCoreManifest.json \
-  ../frame-chassis/FrameChassisManifest.json \
-  ../suspension-dynamics/SuspensionDynamicsManifest.json \
-  ../powertrain/PowertrainManifest.json \
-  ../engineering/EngineeringManifest.json \
-  ../vehicle-creator/VehicleCreatorManifest.json \
-  ../demonstrator/DemonstratorManifest.json
+  $ROOT/contracts/vehicle-contract.json \
+  $ROOT/integration/IntegrationManifest.json \
+  $ROOT/vehicle-core/VehicleCoreManifest.json \
+  $ROOT/frame-chassis/FrameChassisManifest.json \
+  $ROOT/suspension-dynamics/SuspensionDynamicsManifest.json \
+  $ROOT/powertrain/PowertrainManifest.json \
+  $ROOT/engineering/EngineeringManifest.json \
+  $ROOT/vehicle-creator/VehicleCreatorManifest.json \
+  $ROOT/demonstrator/DemonstratorManifest.json
 do
   test -f "$f"
 done
