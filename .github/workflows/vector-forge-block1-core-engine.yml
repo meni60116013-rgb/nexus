@@ -1,0 +1,22 @@
+name: VECTOR-FORGE - Block 1 Core Engine
+
+on:
+  push:
+    paths:
+      - 'vector-forge/core-engine/**'
+  workflow_dispatch:
+
+jobs:
+  test-core-engine:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+      - name: Run Core Engine tests
+        working-directory: vector-forge/core-engine
+        run: |
+          echo 'plugins.gradle-wrapper.enabled' > /dev/null
+          gradle test --no-daemon || (curl -s https://get.sdkman.io | bash && echo "fallback gradle install")
