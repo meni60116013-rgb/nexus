@@ -10,3 +10,8 @@ build
 VECTOR_FORGE_HARVEST_53/
 VECTOR_FORGE_MASTER_50/
 VECTOR_FORGE_MASTER_52/
+
+# Snapshots/inventarios de auditorías previas — no forman parte del release
+VECTOR_FORGE_HARVEST_53/
+VECTOR_FORGE_MASTER_50/
+VECTOR_FORGE_MASTER_52/
