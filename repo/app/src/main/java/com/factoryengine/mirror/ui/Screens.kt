@@ -1,4 +1,4 @@
-package com.factoryengine.mirror.ui
+package com.vcore.vectorforge.ui
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
@@ -8,8 +8,8 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.factoryengine.mirror.BuildPhase
-import com.factoryengine.mirror.MainViewModel
+import com.vcore.vectorforge.BuildPhase
+import com.vcore.vectorforge.MainViewModel
 
 @Composable
 fun HomeScreen(vm: MainViewModel, onGenerate: () -> Unit) {

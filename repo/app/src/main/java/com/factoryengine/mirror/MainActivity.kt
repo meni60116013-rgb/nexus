@@ -1,4 +1,4 @@
-package com.factoryengine.mirror
+package com.vcore.vectorforge
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -14,9 +14,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.factoryengine.mirror.ui.HomeScreen
-import com.factoryengine.mirror.ui.SettingsScreen
-import com.factoryengine.mirror.ui.StatusScreen
+import com.vcore.vectorforge.ui.HomeScreen
+import com.vcore.vectorforge.ui.SettingsScreen
+import com.vcore.vectorforge.ui.StatusScreen
 
 class MainActivity : ComponentActivity() {
     private val vm: MainViewModel by viewModels()

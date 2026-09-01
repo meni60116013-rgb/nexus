@@ -1,4 +1,4 @@
-package com.factoryengine.mirror.network
+package com.vcore.vectorforge.network
 
 import retrofit2.Response
 import retrofit2.http.*

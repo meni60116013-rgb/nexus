@@ -1,4 +1,4 @@
-package com.factoryengine.mirror.data
+package com.vcore.vectorforge.data
 
 import android.content.Context
 import androidx.security.crypto.EncryptedSharedPreferences

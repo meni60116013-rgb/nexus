@@ -1,6 +1,6 @@
-package com.factoryengine.mirror.network
+package com.vcore.vectorforge.network
 
-import com.factoryengine.mirror.data.TokenStore
+import com.vcore.vectorforge.data.TokenStore
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

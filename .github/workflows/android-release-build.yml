@@ -10,6 +10,7 @@ on:
 jobs:
   build-and-sign:
     runs-on: ubuntu-latest
+
     steps:
       - uses: actions/checkout@v4
 
@@ -18,54 +19,49 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Setup Gradle (instalado por el runner, sin depender de gradlew local)
+      - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.4'
 
       - name: Decode keystore
-        run: echo "${{ secrets.KEYSTORE_BASE64 }}" | base64 -d > $RUNNER_TEMP/vcore-release.keystore
-      - name: Verify keystore is not empty
+        env:
+          KEYSTORE_BASE64: ${{ secrets.KEYSTORE_BASE64 }}
         run: |
-          ls -la $RUNNER_TEMP/vcore-release.keystore
-          if [ ! -s $RUNNER_TEMP/vcore-release.keystore ]; then echo "::error::KEYSTORE_BASE64 secret está vacío o mal configurado"; exit 1; fi
+          echo "$KEYSTORE_BASE64" | base64 -d > "$RUNNER_TEMP/vcore-release.keystore"
 
-      - name: Build release APK (app module only)
-          working-directory: repo
-          run: |
+      - name: Verify keystore
+        run: |
+          test -s "$RUNNER_TEMP/vcore-release.keystore"
+          echo "KEYSTORE :: PASS"
+
+      - name: Build release APK
+        working-directory: repo
+        env:
+          KEYSTORE_PATH: ${{ runner.temp }}/vcore-release.keystore
+          KEYSTORE_PASSWORD: ${{ secrets.KEYSTORE_PASSWORD }}
+          KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
+          KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
+        run: |
           echo "===== SIGNING PREFLIGHT ====="
-          KEYSTORE="$RUNNER_TEMP/vcore-release.keystore"
-
-          test -f "$KEYSTORE" || {
-          echo "::error::Release keystore not found: $KEYSTORE"
-          exit 1
-          }
-
-          test -s "$KEYSTORE" || {
-          echo "::error::Release keystore is empty: $KEYSTORE"
-          exit 1
-          }
-
-          echo "KEYSTORE_PATH=$KEYSTORE"
-          ls -lh "$KEYSTORE"
+          test -s "$KEYSTORE_PATH"
 
           keytool -list \
-          -keystore "$KEYSTORE" \
-          -storepass "${{ secrets.KEYSTORE_PASSWORD }}" \
-          -alias "${{ secrets.KEY_ALIAS }}" >/dev/null
+            -keystore "$KEYSTORE_PATH" \
+            -storepass "$KEYSTORE_PASSWORD" \
+            -alias "$KEY_ALIAS" >/dev/null
 
           echo "KEYSTORE_VALIDATION=PASS"
 
           gradle :app:assembleRelease \
-          -Pandroid.injected.signing.store.file="$RUNNER_TEMP/vcore-release.keystore" \
-          -Pandroid.injected.signing.store.password="${{ secrets.KEYSTORE_PASSWORD }}" \
-          -Pandroid.injected.signing.key.alias="${{ secrets.KEY_ALIAS }}" \
-          -Pandroid.injected.signing.key.password="${{ secrets.KEY_PASSWORD }}"
+            -Pandroid.injected.signing.store.file="$KEYSTORE_PATH" \
+            -Pandroid.injected.signing.store.password="$KEYSTORE_PASSWORD" \
+            -Pandroid.injected.signing.key.alias="$KEY_ALIAS" \
+            -Pandroid.injected.signing.key.password="$KEY_PASSWORD"
 
       - name: Upload APK artifact
         uses: actions/upload-artifact@v4
         with:
           name: vector-forge-release-apk
           path: repo/app/build/outputs/apk/release/*.apk
-
-# VECTOR-FORGE release gate checkpoint 20260901135020
+          if-no-files-found: error

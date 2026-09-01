@@ -1,13 +1,13 @@
-package com.factoryengine.mirror
+package com.vcore.vectorforge
 
 import android.app.Application
 import android.content.Intent
 import androidx.core.content.FileProvider
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
-import com.factoryengine.mirror.data.TokenStore
-import com.factoryengine.mirror.network.CreateRepoFromTemplate
-import com.factoryengine.mirror.network.RetrofitClient
+import com.vcore.vectorforge.data.TokenStore
+import com.vcore.vectorforge.network.CreateRepoFromTemplate
+import com.vcore.vectorforge.network.RetrofitClient
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -125,7 +125,7 @@ class MainViewModel(app: Application) : AndroidViewModel(app) {
         val path = _state.value.apkPath ?: return
         val ctx = getApplication<Application>()
         val file = File(path)
-        val uri = FileProvider.getUriForFile(ctx, "com.factoryengine.mirror.fileprovider", file)
+        val uri = FileProvider.getUriForFile(ctx, "com.vcore.vectorforge.fileprovider", file)
         val intent = Intent(Intent.ACTION_VIEW).apply {
             setDataAndType(uri, "application/vnd.android.package-archive")
             addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_GRANT_READ_URI_PERMISSION)
