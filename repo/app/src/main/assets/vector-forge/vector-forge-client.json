@@ -1,0 +1,10 @@
+{
+  "product": "VECTOR-FORGE",
+  "client": "android",
+  "architecture": "thin-client",
+  "core": "vector-forge/core-engine",
+  "vehicleCreator": "vector-forge/vehicle-creator",
+  "demonstrator": "vector-forge/demonstrator",
+  "release": "vector-forge/release/ReleaseManifest.json",
+  "build": "github-actions-only"
+}

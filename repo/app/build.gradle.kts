@@ -3,14 +3,14 @@ plugins {
     id("org.jetbrains.kotlin.android")
 }
 android {
-    namespace = "com.factoryengine.mirror"
+    namespace = "com.vcore.vectorforge"
     compileSdk = 34
     defaultConfig {
-        applicationId = "com.factoryengine.mirror"
+        applicationId = "com.vcore.vectorforge"
         minSdk = 26
         targetSdk = 34
         versionCode = 1
-        versionName = "1.0"
+        versionName = "1.0.0"
     }
     signingConfigs {
         create("release") {
