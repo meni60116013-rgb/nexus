@@ -8,6 +8,16 @@ on:
         required: true
         type: string
 
+permissions:
+  actions: read
+
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "GitHub Actions run containing the APK artifact"
+        required: true
+        type: string
+
 jobs:
   verify-release:
     runs-on: ubuntu-latest
