@@ -31,8 +31,8 @@ jobs:
           if [ ! -s $RUNNER_TEMP/vcore-release.keystore ]; then echo "::error::KEYSTORE_BASE64 secret está vacío o mal configurado"; exit 1; fi
 
       - name: Build release APK (app module only)
-        working-directory: repo
-        run: |
+          working-directory: repo
+          run: |
           echo "===== SIGNING PREFLIGHT ====="
           KEYSTORE="$RUNNER_TEMP/vcore-release.keystore"
 
