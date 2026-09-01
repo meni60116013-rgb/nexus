@@ -67,3 +67,5 @@ jobs:
         with:
           name: vector-forge-release-apk
           path: repo/app/build/outputs/apk/release/*.apk
+
+# VECTOR-FORGE release gate checkpoint 20260901135020
