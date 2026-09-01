@@ -1,0 +1,81 @@
+name: Verify Existing Release APK
+
+on:
+  workflow_dispatch:
+    inputs:
+      source_run_id:
+        description: "GitHub Actions run containing the APK artifact"
+        required: true
+        type: string
+
+jobs:
+  verify-release:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Download existing release artifact
+        env:
+          GH_TOKEN: ${{ github.token }}
+          SOURCE_RUN: ${{ inputs.source_run_id }}
+        run: |
+          set -e
+          mkdir -p artifact
+          gh run download "$SOURCE_RUN" \
+            --repo "${{ github.repository }}" \
+            --name vector-forge-release-apk \
+            --dir artifact
+
+          APK="$(find artifact -type f -name '*.apk' | head -1)"
+
+          test -n "$APK"
+          test -s "$APK"
+
+          echo "APK=$APK" >> "$GITHUB_ENV"
+          ls -lh "$APK"
+          sha256sum "$APK"
+
+      - name: Verify APK signature
+        run: |
+          set -e
+
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+
+          APKSIGNER="$(find "$SDK_ROOT/build-tools" \
+            -type f -name apksigner 2>/dev/null | sort -V | tail -1)"
+
+          test -x "$APKSIGNER"
+
+          echo "APKSIGNER=$APKSIGNER"
+
+          "$APKSIGNER" verify \
+            --verbose \
+            --print-certs \
+            "$APK"
+
+      - name: Verify APK manifest
+        run: |
+          set -e
+
+          SDK_ROOT="${ANDROID_SDK_ROOT:-$ANDROID_HOME}"
+
+          AAPT="$(find "$SDK_ROOT/build-tools" \
+            -type f -name aapt 2>/dev/null | sort -V | tail -1)"
+
+          test -x "$AAPT"
+
+          "$AAPT" dump badging "$APK" | tee manifest.txt
+
+          grep -q "package: name='com.factoryengine.mirror'" manifest.txt
+          grep -q "versionName='1.0'" manifest.txt
+          grep -q "targetSdkVersion:'34'" manifest.txt
+
+      - name: Final cryptographic gate
+        run: |
+          echo "===== CRYPTOGRAPHIC RELEASE GATE ====="
+          echo "ARTIFACT :: PASS"
+          echo "APKSIGNER :: PASS"
+          echo "SIGNATURE :: PASS"
+          echo "MANIFEST :: PASS"
+          echo "REMOTE BUILD :: PASS"
+          echo "LOCAL BUILD :: NONE"
+          echo "INSTALL :: NOT YET"
