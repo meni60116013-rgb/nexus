@@ -1,0 +1,70 @@
+==================================================
+PATH :: /data/data/com.termux/files/home/nexus-consolidado
+REMOTE :: https://github.com/meni60116013-rgb/nexus.git
+BRANCH :: main
+HEAD :: 7f4563e
+STATUS :: 1 changed-files
+AHEAD_BEHIND :: 0	0
+==================================================
+PATH :: /data/data/com.termux/files/home/VCORE_NEXUS_VEHICLE_ENGINEERING
+REMOTE :: https://github.com/meni60116013-rgb/nexux_vcore.git
+BRANCH :: main
+HEAD :: e78d789
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: NA
+==================================================
+PATH :: /data/data/com.termux/files/home/VECTOR-FORGE
+REMOTE :: https://github.com/meni60116013-rgb/VECTOR-FORGE.git
+BRANCH :: main
+HEAD :: 7e4c283
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: 0	0
+==================================================
+PATH :: /data/data/com.termux/files/home/VCoreCore
+REMOTE :: https://github.com/meni60116013-rgb/vcore-core.git
+BRANCH :: main
+HEAD :: bb29496
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: 0	0
+==================================================
+PATH :: /data/data/com.termux/files/home/vcore-grid-suite
+REMOTE :: git@github.com:meni60116013-rgb/VCORE-GRID-SUITE-MASTER.git
+BRANCH :: main
+HEAD :: 4c4d3f2
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: NA
+==================================================
+PATH :: /data/data/com.termux/files/home/factory-engine-suite
+REMOTE :: https://github.com/meni60116013-rgb/factory-engine-suite.git
+BRANCH :: main
+HEAD :: 8e2d59e
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: 0	1
+==================================================
+PATH :: /data/data/com.termux/files/home/factory_engine_mirror_build/repo
+REMOTE :: https://github.com/meni60116013-rgb/factory-engine-mirror.git
+BRANCH :: main
+HEAD :: c96225c
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: 0	1
+==================================================
+PATH :: /data/data/com.termux/files/home/nexus-design-dream
+REMOTE :: https://github.com/meni60116013-rgb/nexus-design-dream.git
+BRANCH :: main
+HEAD :: 44916cf
+STATUS :: 9 changed-files
+AHEAD_BEHIND :: 0	0
+==================================================
+PATH :: /data/data/com.termux/files/home/HiddenSignal
+REMOTE :: https://github.com/meni60116013-rgb/hidden-signal.git
+BRANCH :: main
+HEAD :: cb457d7
+STATUS :: 0 changed-files
+AHEAD_BEHIND :: 0	0
+==================================================
+PATH :: /data/data/com.termux/files/home/VCORE_PLATFORM_FUSION
+REMOTE :: NONE
+BRANCH :: main
+HEAD :: 2b1e5ee
+STATUS :: 326 changed-files
+AHEAD_BEHIND :: NA

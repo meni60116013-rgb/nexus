@@ -1,0 +1,35 @@
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/nexus-consolidado
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/android-release-build.yml
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/ci.yml
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/vector-forge-block1-core-engine.yml
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/vector-forge-final-gate.yml
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/vector-forge-master-gate.yml
+/data/data/com.termux/files/home/nexus-consolidado/.github/workflows/verify-release-artifact.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/VCORE_NEXUS_VEHICLE_ENGINEERING
+/data/data/com.termux/files/home/VCORE_NEXUS_VEHICLE_ENGINEERING/.github/workflows/build.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/vcore-grid-suite
+/data/data/com.termux/files/home/vcore-grid-suite/.github/workflows/ci.yml
+/data/data/com.termux/files/home/vcore-grid-suite/.github/workflows/cloud_audit.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/factory-engine-suite
+/data/data/com.termux/files/home/factory-engine-suite/.github/workflows/build.yml
+/data/data/com.termux/files/home/factory-engine-suite/.github/workflows/release.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/factory_engine_mirror_build/repo
+/data/data/com.termux/files/home/factory_engine_mirror_build/repo/.github/workflows/build.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/VECTOR-FORGE
+/data/data/com.termux/files/home/VECTOR-FORGE/.github/workflows/ci.yml
+
+==================================================
+REPOSITORY :: /data/data/com.termux/files/home/VCORE_PLATFORM_FUSION
+/data/data/com.termux/files/home/VCORE_PLATFORM_FUSION/.github/workflows/vcore-fusion-validation.yml
