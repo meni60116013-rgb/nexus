@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>VECTOR-FORGE // Vehicle Engineering Platform</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three@0.128.0/examples/js/controls/OrbitControls.js"></script>
+<style>
+:root{
+  --bg:#050709; --panel:#0a1016; --panel-2:#0d151c; --line:#123742;
+  --cyan:#00eaff; --green:#00ff9d; --amber:#ffb020; --danger:#ff3b5c;
+  --text:#d8f3f7; --muted:#587480; --sidebar-w:210px;
+}
+*{box-sizing:border-box;}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--text);font-family:'Share Tech Mono',monospace;height:100%;overflow:hidden;}
+h1,h2,h3,h4{font-family:'Orbitron',sans-serif;letter-spacing:.06em;margin:0;}
+::selection{background:var(--cyan);color:#000;}
+
+#shell{display:flex;height:100vh;}
+
+/* ---------- SIDEBAR ---------- */
+#sidebar{
+  width:var(--sidebar-w);flex-shrink:0;background:var(--panel-2);border-right:1px solid var(--line);
+  display:flex;flex-direction:column;transition:transform .25s ease;z-index:20;
+}
+#sidebar .brand{padding:18px 16px;border-bottom:1px solid var(--line);display:flex;align-items:center;gap:10px;}
+#sidebar .brand .dot{width:8px;height:8px;border-radius:50%;background:var(--green);box-shadow:0 0 8px var(--green);animation:pulse 2s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1;}50%{opacity:.35;}}
+#sidebar .brand h1{font-size:.95rem;color:var(--cyan);text-shadow:0 0 10px rgba(0,234,255,.5);}
+#sidebar .brand .sub{font-size:.55rem;color:var(--muted);letter-spacing:.1em;}
+#sidebar nav{flex:1;overflow-y:auto;padding:10px 8px;}
+#sidebar nav button{
+  width:100%;text-align:left;background:transparent;border:none;color:var(--muted);
+  padding:10px 12px;border-radius:6px;font-family:'Share Tech Mono',monospace;font-size:.72rem;
+  letter-spacing:.05em;text-transform:uppercase;cursor:pointer;display:flex;align-items:center;gap:10px;margin-bottom:2px;
+}
+#sidebar nav button .ic{font-size:.95rem;width:16px;text-align:center;}
+#sidebar nav button.active{color:var(--cyan);background:rgba(0,234,255,.08);border-left:2px solid var(--cyan);}
+#sidebar .sysfoot{padding:12px 16px;border-top:1px solid var(--line);font-size:.6rem;color:var(--muted);letter-spacing:.1em;}
+#sidebar .sysfoot .v{color:var(--green);}
+
+/* ---------- MAIN ---------- */
+#main{flex:1;display:flex;flex-direction:column;overflow:hidden;}
+header.topbar{
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:14px 18px;border-bottom:1px solid var(--line);
+  background:linear-gradient(180deg, rgba(0,234,255,.05), transparent);
+}
+header.topbar button#menuBtn{display:none;background:transparent;border:1px solid var(--line);color:var(--cyan);border-radius:6px;padding:6px 10px;font-size:1rem;}
+header.topbar h2{font-size:1rem;color:var(--text);}
+header.topbar .status{font-size:.6rem;color:var(--muted);letter-spacing:.1em;text-transform:uppercase;}
+
+#content{flex:1;overflow-y:auto;padding:18px;}
+.screen{display:none;animation:fadein .3s ease;}
+.screen.active{display:block;}
+@keyframes fadein{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:translateY(0);}}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;margin-bottom:14px;}
+.panel,.card{
+  background:var(--panel);border:1px solid var(--line);border-radius:8px;padding:16px;position:relative;
+}
+.panel::before,.card::before{
+  content:"";position:absolute;top:0;left:14px;right:14px;height:1px;
+  background:linear-gradient(90deg, transparent, var(--cyan), transparent);opacity:.5;
+}
+.panel h3,.card h3{font-size:.85rem;color:var(--cyan);margin-bottom:10px;display:flex;align-items:center;gap:8px;}
+.panel h3 .idx,.card h3 .idx{color:var(--muted);font-size:.65rem;}
+p.desc{color:var(--muted);font-size:.75rem;line-height:1.5;margin:0 0 10px;}
+
+.kv{display:flex;justify-content:space-between;font-size:.75rem;padding:5px 0;border-bottom:1px dashed var(--line);}
+.kv:last-child{border-bottom:none;}
+.kv .k{color:var(--muted);}
+.kv .v{color:var(--text);font-weight:bold;}
+.kv .v.ok{color:var(--green);} .kv .v.warn{color:var(--amber);} .kv .v.bad{color:var(--danger);}
+
+.bar{height:6px;border-radius:3px;background:#03070a;border:1px solid var(--line);overflow:hidden;margin-top:4px;}
+.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--cyan),var(--green));}
+
+.ring{width:88px;height:88px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:6px auto;position:relative;}
+.ring .num{font-family:'Orbitron',sans-serif;font-size:1.05rem;color:var(--green);}
+
+label{display:block;font-size:.65rem;color:var(--muted);letter-spacing:.07em;margin-top:9px;text-transform:uppercase;}
+input,select,textarea{
+  width:100%;padding:9px;margin-top:4px;background:#03070a;border:1px solid var(--line);
+  color:var(--text);border-radius:5px;font-family:'Share Tech Mono',monospace;font-size:.82rem;
+}
+textarea{resize:vertical;min-height:80px;}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--cyan);box-shadow:0 0 0 1px rgba(0,234,255,.3);}
+
+button.action{
+  width:100%;padding:12px;margin-top:12px;background:rgba(0,234,255,.08);border:1px solid var(--cyan);
+  color:var(--cyan);font-family:'Orbitron',sans-serif;font-weight:700;font-size:.68rem;letter-spacing:.1em;
+  text-transform:uppercase;border-radius:5px;cursor:pointer;
+}
+button.action:active{background:rgba(0,234,255,.2);}
+button.action:disabled{opacity:.35;border-color:var(--muted);color:var(--muted);cursor:not-allowed;}
+button.ghost{background:transparent;border:1px solid var(--line);color:var(--muted);}
+button.danger{border-color:var(--danger);color:var(--danger);background:rgba(255,59,92,.08);}
+
+.readout{
+  margin-top:10px;padding:10px 12px;background:#03070a;border-left:2px solid var(--cyan);
+  font-size:.78rem;line-height:1.6;border-radius:0 5px 5px 0;min-height:18px;word-break:break-word;
+}
+.readout .v.ok{color:var(--green);} .readout .v.warn{color:var(--amber);} .readout .v.bad{color:var(--danger);}
+.status-pill{display:inline-block;padding:3px 9px;border-radius:20px;font-size:.6rem;letter-spacing:.08em;border:1px solid currentColor;text-transform:uppercase;}
+.tabs-inline{display:flex;gap:6px;margin-bottom:10px;flex-wrap:wrap;}
+.tabs-inline button{background:#03070a;border:1px solid var(--line);color:var(--muted);padding:6px 10px;border-radius:5px;font-size:.62rem;letter-spacing:.05em;text-transform:uppercase;}
+.tabs-inline button.active{border-color:var(--cyan);color:var(--cyan);}
+
+@media (max-width:760px){
+  :root{--sidebar-w:220px;}
+  #sidebar{position:fixed;top:0;bottom:0;left:0;transform:translateX(-100%);}
+  #sidebar.open{transform:translateX(0);}
+  header.topbar button#menuBtn{display:inline-block;}
+}
+</style>
+</head>
+<body>
+<div id="shell">
+
+  <aside id="sidebar">
+    <div class="brand"><span class="dot"></span><div><h1>VECTOR-FORGE</h1><div class="sub">VEHICLE ENGINEERING PLATFORM</div></div></div>
+    <nav id="navlist">
+      <button data-screen="dashboard" class="active"><span class="ic">▦</span>Dashboard</button>
+      <button data-screen="creator"><span class="ic">⚙</span>Vehicle Creator</button>
+      <button data-screen="engineering"><span class="ic">▣</span>Engineering</button>
+      <button data-screen="diagnostics"><span class="ic">✚</span>Diagnostics</button>
+      <button data-screen="telemetry"><span class="ic">◈</span>Telemetry</button>
+      <button data-screen="analytics"><span class="ic">▤</span>Analytics</button>
+      <button data-screen="build"><span class="ic">▲</span>Build / CI</button>
+      <button data-screen="config"><span class="ic">◆</span>Config</button>
+    </nav>
+    <div class="sysfoot">SYSTEM STATUS<br><span class="v" id="sys-status">OPERATIONAL</span></div>
+  </aside>
+
+  <div id="main">
+    <header class="topbar">
+      <button id="menuBtn" onclick="document.getElementById('sidebar').classList.toggle('open')">☰</button>
+      <h2 id="pageTitle">Dashboard</h2>
+      <div class="status" id="topStatus">VERIFICANDO…</div>
+    </header>
+
+    <div id="content">
+
+      <!-- DASHBOARD -->
+      <section class="screen active" id="screen-dashboard">
+        <div class="grid">
+          <div class="panel">
+            <h3><span class="idx">00</span>Estado del proyecto</h3>
+            <div class="kv"><span class="k">Vehículo activo</span><span class="v" id="d-vin">— sin registrar —</span></div>
+            <div class="kv"><span class="k">Credencial GitHub</span><span class="v" id="d-token">— sin configurar —</span></div>
+            <div class="kv"><span class="k">Repositorio</span><span class="v" id="d-repo">— sin configurar —</span></div>
+            <div class="kv"><span class="k">Último build</span><span class="v" id="d-build">— sin ejecutar —</span></div>
+          </div>
+          <div class="panel" style="text-align:center;">
+            <h3 style="justify-content:center;"><span class="idx">01</span>Systems Readiness</h3>
+            <div class="ring" id="readinessRing"><span class="num" id="readinessNum">0%</span></div>
+            <div style="font-size:.62rem;color:var(--muted);letter-spacing:.08em;">basado en pasos reales completados</div>
+          </div>
+          <div class="panel">
+            <h3><span class="idx">02</span>Módulos de ingeniería</h3>
+            <div class="kv"><span class="k">Chasis (FdS)</span><span class="v" id="d-chasis">pendiente</span></div>
+            <div class="kv"><span class="k">Transmisión</span><span class="v" id="d-gear">pendiente</span></div>
+            <div class="kv"><span class="k">Enfriamiento</span><span class="v" id="d-cool">pendiente</span></div>
+          </div>
+        </div>
+
+        <div class="grid">
+          <div class="card"><h3><span class="idx">▢</span>Vehicle Core</h3><p class="desc">Definición universal del vehículo.</p></div>
+          <div class="card"><h3><span class="idx">▢</span>Frame / Chassis</h3><p class="desc">Geometría y resistencia estructural.</p></div>
+          <div class="card"><h3><span class="idx">▢</span>Suspension / Dynamics</h3><p class="desc">Dinámica, cargas y movimiento.</p></div>
+          <div class="card"><h3><span class="idx">▢</span>Powertrain</h3><p class="desc">Potencia, torque y rendimiento.</p></div>
+        </div>
+      </section>
+
+      <!-- VEHICLE CREATOR -->
+      <section class="screen" id="screen-creator">
+        <div class="tabs-inline" id="creatorTabs">
+          <button data-ctab="spec" class="active">Especificación</button>
+          <button data-ctab="view3d">Vista 3D</button>
+        </div>
+
+        <div class="panel creator-tab" id="ctab-spec">
+          <h3><span class="idx">03</span>Vehicle Creator</h3>
+          <p class="desc">Construye la definición del vehículo. Esta especificación alimenta a Engineering, Build y la Vista 3D.</p>
+
+          <label>VIN / Identificador</label>
+          <input id="c-name" placeholder="Ej. 33FTGT150X001">
+
+          <label>Arquitectura base</label>
+          <select id="c-arch">
+            <option value="tubular_trellis">Chasis tubular trellis</option>
+            <option value="monocasco">Monocasco</option>
+            <option value="perimetral">Perimetral / doble viga</option>
+          </select>
+
+          <label>Material del chasis</label>
+          <select id="c-material">
+            <option value="cromoly_4130">4130 Cromoly</option>
+            <option value="acero_1020">Acero 1020 Estructural</option>
+            <option value="aluminio_6061">Aluminio 6061-T6</option>
+          </select>
+
+          <label>Suspensión</label>
+          <select id="c-suspension">
+            <option value="doble_horquilla">Doble horquilla (A-arm)</option>
+            <option value="mcpherson">McPherson</option>
+            <option value="basculante">Basculante trasero</option>
+          </select>
+
+          <label>Powertrain</label>
+          <select id="c-powertrain">
+            <option value="combustion">Combustión interna</option>
+            <option value="electrico">Eléctrico</option>
+            <option value="hibrido">Híbrido</option>
+          </select>
+
+          <label>Distancia entre ejes / wheelbase (mm)</label>
+          <input type="number" id="c-wheelbase" value="1400">
+
+          <label>Diámetro de rueda (mm)</label>
+          <input type="number" id="c-wheeldiam" value="600">
+
+          <label>Notas / parámetros adicionales (JSON, opcional)</label>
+          <textarea id="c-extra" placeholder='{"potenciaHp": 15, "pesoKg": 140}'></textarea>
+
+          <button class="action" onclick="guardarSpec()">GENERAR ESPECIFICACIÓN</button>
+          <button class="action ghost" onclick="verSpec()">VER ÚLTIMA ESPECIFICACIÓN</button>
+          <div class="readout" id="creator-out">Sin especificación generada.</div>
+        </div>
+
+        <div class="panel creator-tab" id="ctab-view3d" style="display:none;">
+          <h3><span class="idx">3D</span>Vista 3D del vehículo</h3>
+          <p class="desc">Geometría generada en vivo a partir de la especificación (arquitectura, material, suspensión, powertrain). Arrastra para rotar.</p>
+          <div id="canvas3d-wrap" style="width:100%;height:320px;border:1px solid var(--line);border-radius:6px;overflow:hidden;background:#03070a;position:relative;">
+            <div id="canvas3d-hint" style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.7rem;letter-spacing:.08em;text-align:center;padding:16px;">
+              Genera una especificación en la pestaña anterior para renderizar el vehículo.
+            </div>
+          </div>
+          <div class="tabs-inline" style="margin-top:10px;">
+            <button onclick="toggleAutoRotate()" id="btnAutoRotate">AUTO-ROTAR: ON</button>
+            <button onclick="actualizarVista3D()">ACTUALIZAR VISTA</button>
+          </div>
+          <div class="readout" id="view3d-out" style="margin-top:8px;">Sin geometría generada.</div>
+        </div>
+      </section>
+
+      <!-- ENGINEERING -->
+      <section class="screen" id="screen-engineering">
+        <div class="tabs-inline" id="engTabs">
+          <button data-eng="chasis" class="active">Chasis</button>
+          <button data-eng="transmision">Transmisión</button>
+          <button data-eng="enfriamiento">Enfriamiento</button>
+        </div>
+
+        <div class="panel eng-panel" id="eng-chasis">
+          <h3><span class="idx">04</span>Resistencia de materiales — chasis</h3>
+          <label>Fuerza de carga / impacto (N)</label><input type="number" id="input-fuerza" value="2500">
+          <label>Longitud del tubo (mm)</label><input type="number" id="input-longitud" value="600">
+          <label>Diámetro exterior (mm)</label><input type="number" id="input-diametro" value="31.75">
+          <label>Espesor de pared (mm)</label><input type="number" id="input-espesor" value="2.0">
+          <label>Material</label>
+          <select id="select-material">
+            <option value="cromoly_4130">4130 Cromoly</option>
+            <option value="acero_1020">Acero 1020 Estructural</option>
+            <option value="dom_1026">Tubo D.O.M. 1026</option>
+          </select>
+          <button class="action" onclick="calcularChasis()">ANALIZAR CARGAS</button>
+          <div class="readout" id="chasis-out">Esperando cálculo…</div>
+        </div>
+
+        <div class="panel eng-panel" id="eng-transmision" style="display:none;">
+          <h3><span class="idx">05</span>Cinemática y transmisión</h3>
+          <label>Dientes piñón</label><input type="number" id="input-pinon" value="15">
+          <label>Dientes corona</label><input type="number" id="input-corona" value="38">
+          <label>RPM del motor</label><input type="number" id="input-rpm" value="7500">
+          <label>Radio de rueda (mm)</label><input type="number" id="input-radio-rueda" value="300">
+          <button class="action" onclick="calcularTransmision()">CALCULAR TRANSMISIÓN</button>
+          <div class="readout" id="gear-out">Esperando cálculo…</div>
+        </div>
+
+        <div class="panel eng-panel" id="eng-enfriamiento" style="display:none;">
+          <h3><span class="idx">06</span>Enfriamiento y térmica</h3>
+          <label>Potencia del motor (HP)</label><input type="number" id="input-hp" value="15">
+          <label>Temperatura ambiente (°C)</label><input type="number" id="input-temp-amb" value="30">
+          <button class="action" onclick="calcularEnfriamiento()">CALCULAR DISIPACIÓN</button>
+          <div class="readout" id="cooling-out">Esperando cálculo…</div>
+        </div>
+      </section>
+
+      <!-- DIAGNOSTICS -->
+      <section class="screen" id="screen-diagnostics">
+        <div class="panel">
+          <h3><span class="idx">09</span>Diagnóstico de motor</h3>
+          <p class="desc">Evaluación real por umbrales (no simulada) sobre los valores que ingreses.</p>
+          <label>Temperatura del motor (°C)</label><input type="number" id="dx-temp" value="90">
+          <label>Presión de aceite (PSI)</label><input type="number" id="dx-oil" value="40">
+          <label><input type="checkbox" id="dx-vib" style="width:auto;display:inline-block;margin-right:6px;">Vibración anormal detectada</label>
+          <label><input type="checkbox" id="dx-sos" style="width:auto;display:inline-block;margin-right:6px;">Alerta SOS activa</label>
+          <button class="action" onclick="evaluarDiagnostico()">EVALUAR</button>
+          <div class="readout" id="dx-out">Sin evaluación.</div>
+        </div>
+        <div class="panel">
+          <h3><span class="idx">10</span>Interpretación de código DTC (OBD-II)</h3>
+          <label>Código</label><input id="dx-code" placeholder="Ej. P0300" value="P0300">
+          <button class="action" onclick="interpretarDTC()">INTERPRETAR</button>
+          <div class="readout" id="dtc-out">Sin código consultado.</div>
+        </div>
+        <div class="panel">
+          <h3><span class="idx">11</span>Historial de diagnósticos (esta sesión/dispositivo)</h3>
+          <div class="readout" id="dx-history">Sin registros aún.</div>
+        </div>
+      </section>
+
+      <!-- TELEMETRY -->
+      <section class="screen" id="screen-telemetry">
+        <div class="panel">
+          <h3><span class="idx">12</span>Telemetría manual</h3>
+          <p class="desc"><strong>Aviso honesto:</strong> este WebView no puede leer un sensor OBD-II/Bluetooth en vivo por sí mismo — eso requiere un puente nativo Android (Kotlin, como el módulo Sonar que ya te generé antes). Aquí puedes registrar lecturas manualmente y quedan guardadas con fecha/hora real.</p>
+          <label>RPM</label><input type="number" id="tm-rpm" value="3250">
+          <label>Velocidad (km/h)</label><input type="number" id="tm-speed" value="62">
+          <label>Temperatura motor (°C)</label><input type="number" id="tm-temp" value="92">
+          <label>Voltaje de batería (V)</label><input type="number" step="0.1" id="tm-volt" value="13.6">
+          <button class="action" onclick="registrarLectura()">REGISTRAR LECTURA</button>
+        </div>
+        <div class="panel">
+          <h3><span class="idx">13</span>Última lectura</h3>
+          <div class="kv"><span class="k">RPM</span><span class="v" id="tm-d-rpm">—</span></div>
+          <div class="kv"><span class="k">Velocidad</span><span class="v" id="tm-d-speed">—</span></div>
+          <div class="kv"><span class="k">Temperatura</span><span class="v" id="tm-d-temp">—</span></div>
+          <div class="kv"><span class="k">Voltaje</span><span class="v" id="tm-d-volt">—</span></div>
+          <div class="kv"><span class="k">Registrada</span><span class="v" id="tm-d-at">—</span></div>
+        </div>
+        <div class="panel">
+          <h3><span class="idx">14</span>Bitácora de lecturas</h3>
+          <div class="readout" id="tm-history">Sin lecturas registradas.</div>
+        </div>
+      </section>
+
+      <!-- ANALYTICS -->
+      <section class="screen" id="screen-analytics">
+        <div class="grid">
+          <div class="panel">
+            <h3><span class="idx">15</span>Ingeniería</h3>
+            <div class="kv"><span class="k">Cálculos de chasis</span><span class="v" id="an-chasis-n">0</span></div>
+            <div class="kv"><span class="k">FdS promedio</span><span class="v" id="an-chasis-avg">—</span></div>
+            <div class="kv"><span class="k">Cálculos de transmisión</span><span class="v" id="an-gear-n">0</span></div>
+            <div class="kv"><span class="k">Cálculos de enfriamiento</span><span class="v" id="an-cool-n">0</span></div>
+          </div>
+          <div class="panel">
+            <h3><span class="idx">16</span>Diagnóstico</h3>
+            <div class="kv"><span class="k">Evaluaciones totales</span><span class="v" id="an-dx-n">0</span></div>
+            <div class="kv"><span class="k">Óptimo</span><span class="v ok" id="an-dx-ok">0</span></div>
+            <div class="kv"><span class="k">Precaución</span><span class="v warn" id="an-dx-warn">0</span></div>
+            <div class="kv"><span class="k">Crítico</span><span class="v bad" id="an-dx-bad">0</span></div>
+          </div>
+          <div class="panel">
+            <h3><span class="idx">17</span>Build / CI</h3>
+            <div class="kv"><span class="k">Builds disparados</span><span class="v" id="an-build-n">0</span></div>
+            <div class="kv"><span class="k">Último resultado</span><span class="v" id="an-build-last">—</span></div>
+          </div>
+        </div>
+        <div class="panel">
+          <h3><span class="idx">18</span>Distribución de diagnósticos</h3>
+          <div style="margin-top:6px;">
+            <div class="kv"><span class="k">Óptimo</span><span class="v" id="an-bar-ok-lbl">0%</span></div>
+            <div class="bar"><i id="an-bar-ok" style="width:0%;background:linear-gradient(90deg,#00ff9d,#00eaff);"></i></div>
+            <div class="kv" style="margin-top:8px;"><span class="k">Precaución</span><span class="v" id="an-bar-warn-lbl">0%</span></div>
+            <div class="bar"><i id="an-bar-warn" style="width:0%;background:linear-gradient(90deg,#ffb020,#ff8a00);"></i></div>
+            <div class="kv" style="margin-top:8px;"><span class="k">Crítico</span><span class="v" id="an-bar-bad-lbl">0%</span></div>
+            <div class="bar"><i id="an-bar-bad" style="width:0%;background:linear-gradient(90deg,#ff3b5c,#c2003f);"></i></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- BUILD -->
+      <section class="screen" id="screen-build">
+        <div class="panel">
+          <h3><span class="idx">07</span>Build Center</h3>
+          <p class="desc">Pipeline de compilación — corre en GitHub Actions, nunca localmente.</p>
+          <div class="readout" id="build-status">ESPERANDO BUILD — Genera un vehículo desde Vehicle Creator.</div>
+          <button class="action" id="btn-build" onclick="dispararBuild()">GENERAR BUILD</button>
+          <button class="action ghost" onclick="consultarUltimoRun()">CONSULTAR ÚLTIMO RUN</button>
+          <div id="build-link" style="margin-top:10px;font-size:.76rem;"></div>
+        </div>
+      </section>
+
+      <!-- CONFIG -->
+      <section class="screen" id="screen-config">
+        <div class="panel">
+          <h3><span class="idx">08</span>Config</h3>
+          <p class="desc">Credencial GitHub almacenada en este dispositivo (localStorage del WebView).</p>
+          <label>GitHub Token (repo + workflow scopes)</label><input id="cfg-token" type="password" placeholder="ghp_...">
+          <label>Owner / Organización</label><input id="cfg-owner" placeholder="meni60116013-rgb">
+          <label>Repositorio</label><input id="cfg-repo" placeholder="VECTOR-FORGE">
+          <label>Rama</label><input id="cfg-branch" placeholder="main" value="main">
+          <label>Archivo de workflow (.yml)</label><input id="cfg-workflow" placeholder="vector-forge-ci.yml">
+          <button class="action" onclick="guardarCredencial()">GUARDAR CREDENCIAL</button>
+          <button class="action danger" onclick="borrarCredencial()">BORRAR CREDENCIAL</button>
+          <div class="readout" id="config-out">Sin verificar.</div>
+        </div>
+        <div class="grid">
+          <div class="card"><h3>Release Authority</h3><p class="desc">GitHub Actions</p></div>
+          <div class="card"><h3>Android Target</h3><p class="desc">SDK 34 · API 34</p></div>
+          <div class="card"><h3>Architecture</h3><p class="desc">Thin Client</p></div>
+          <div class="card"><h3>Local Gradle</h3><p class="desc">Disabled by policy</p></div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<script>
+/* ---------- Navegación sidebar ---------- */
+const titles = {dashboard:'Dashboard', creator:'Vehicle Creator', engineering:'Engineering', diagnostics:'Diagnostics', telemetry:'Telemetry', analytics:'Analytics', build:'Build / CI', config:'Config'};
+document.getElementById('navlist').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-screen]');
+  if(!btn) return;
+  goTo(btn.dataset.screen);
+  document.getElementById('sidebar').classList.remove('open');
+});
+function goTo(name){
+  document.querySelectorAll('#navlist button').forEach(b=>b.classList.toggle('active', b.dataset.screen===name));
+  document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active', s.id==='screen-'+name));
+  document.getElementById('pageTitle').textContent = titles[name] || name;
+  if(name==='dashboard') refrescarDashboard();
+  if(name==='diagnostics') renderDxHistory();
+  if(name==='telemetry') { renderUltimaLectura(); renderTmHistory(); }
+  if(name==='analytics') renderAnalytics();
+}
+
+/* ---------- Tabs internas de Vehicle Creator ---------- */
+document.getElementById('creatorTabs').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-ctab]');
+  if(!btn) return;
+  document.querySelectorAll('#creatorTabs button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.querySelectorAll('.creator-tab').forEach(p=>p.style.display='none');
+  document.getElementById('ctab-'+btn.dataset.ctab).style.display='block';
+  if(btn.dataset.ctab==='view3d'){
+    setTimeout(()=>{ initScene3D(); actualizarVista3D(); }, 30);
+  }
+});
+
+/* ---------- Tabs internas de Engineering ---------- */
+document.getElementById('engTabs').addEventListener('click', e=>{
+  const btn = e.target.closest('button[data-eng]');
+  if(!btn) return;
+  document.querySelectorAll('#engTabs button').forEach(b=>b.classList.toggle('active', b===btn));
+  document.querySelectorAll('.eng-panel').forEach(p=>p.style.display='none');
+  document.getElementById('eng-'+btn.dataset.eng).style.display='block';
+});
+
+/* ---------- Config / credenciales ---------- */
+function cfg(){
+  return {
+    token: localStorage.getItem('vf_token') || '',
+    owner: localStorage.getItem('vf_owner') || '',
+    repo: localStorage.getItem('vf_repo') || '',
+    branch: localStorage.getItem('vf_branch') || 'main',
+    workflow: localStorage.getItem('vf_workflow') || ''
+  };
+}
+const cfgToken = document.getElementById('cfg-token');
+const cfgOwner_ = document.getElementById('cfg-owner');
+const cfgRepo_ = document.getElementById('cfg-repo');
+const cfgBranch_ = document.getElementById('cfg-branch');
+const cfgWorkflow_ = document.getElementById('cfg-workflow');
+function cargarConfigEnForm(){
+  const c = cfg();
+  cfgToken.value = c.token; cfgOwner_.value = c.owner; cfgRepo_.value = c.repo;
+  cfgBranch_.value = c.branch; cfgWorkflow_.value = c.workflow;
+}
+function guardarCredencial(){
+  const token = cfgToken.value.trim(), owner = cfgOwner_.value.trim(), repo = cfgRepo_.value.trim();
+  const branch = cfgBranch_.value.trim() || 'main', workflow = cfgWorkflow_.value.trim();
+  const out = document.getElementById('config-out');
+  if(!token || !owner || !repo || !workflow){
+    out.innerHTML = '<span class="v bad">Faltan campos: token, owner, repo y workflow son obligatorios.</span>';
+    return;
+  }
+  localStorage.setItem('vf_token', token); localStorage.setItem('vf_owner', owner);
+  localStorage.setItem('vf_repo', repo); localStorage.setItem('vf_branch', branch);
+  localStorage.setItem('vf_workflow', workflow);
+  out.innerHTML = 'Verificando credencial contra GitHub…';
+  fetch(`https://api.github.com/repos/${owner}/${repo}`, {headers:{'Authorization':`Bearer ${token}`,'Accept':'application/vnd.github+json'}})
+    .then(r=>{
+      if(r.status===200) out.innerHTML = `<span class="v ok">Credencial válida. Acceso confirmado a ${owner}/${repo}.</span>`;
+      else if(r.status===404) out.innerHTML = '<span class="v bad">Repositorio no encontrado o sin permiso.</span>';
+      else if(r.status===401) out.innerHTML = '<span class="v bad">Token inválido o expirado.</span>';
+      else out.innerHTML = `<span class="v warn">Respuesta inesperada: ${r.status}</span>`;
+    }).catch(()=>{ out.innerHTML = '<span class="v bad">Sin conexión a GitHub.</span>'; });
+}
+function borrarCredencial(){
+  ['vf_token','vf_owner','vf_repo','vf_branch','vf_workflow'].forEach(k=>localStorage.removeItem(k));
+  cargarConfigEnForm();
+  document.getElementById('config-out').innerHTML = 'Credencial eliminada de este dispositivo.';
+}
+
+/* ---------- Vehicle Creator ---------- */
+function guardarSpec(){
+  const out = document.getElementById('creator-out');
+  let extra = {};
+  const extraRaw = document.getElementById('c-extra').value.trim();
+  if(extraRaw){ try{ extra = JSON.parse(extraRaw); } catch(e){ out.innerHTML = '<span class="v bad">JSON de notas inválido.</span>'; return; } }
+  const name = document.getElementById('c-name').value.trim();
+  if(!name){ out.innerHTML = '<span class="v bad">Ingresa un VIN/identificador.</span>'; return; }
+  const spec = {
+    name,
+    architecture: document.getElementById('c-arch').value,
+    material: document.getElementById('c-material').value,
+    suspension: document.getElementById('c-suspension').value,
+    powertrain: document.getElementById('c-powertrain').value,
+    wheelbaseMm: parseFloat(document.getElementById('c-wheelbase').value) || 1400,
+    wheelDiamMm: parseFloat(document.getElementById('c-wheeldiam').value) || 600,
+    extra, generatedAt: new Date().toISOString()
+  };
+  localStorage.setItem('vf_last_spec', JSON.stringify(spec));
+  out.innerHTML = `Especificación <span class="v ok">${name}</span> generada.`;
+}
+function verSpec(){
+  const out = document.getElementById('creator-out');
+  const raw = localStorage.getItem('vf_last_spec');
+  if(!raw){ out.innerHTML = 'No hay especificación guardada aún.'; return; }
+  out.innerHTML = `<pre style="white-space:pre-wrap;margin:0;">${JSON.stringify(JSON.parse(raw), null, 2)}</pre>`;
+}
+
+/* ---------- Engineering (motores reales, mismas fórmulas ya validadas) ---------- */
+const materiales = {
+  acero_1020:{nombre:"Acero 1020 / Estructural", limiteElastico:290},
+  cromoly_4130:{nombre:"4130 Cromoly", limiteElastico:460},
+  dom_1026:{nombre:"Tubo D.O.M. 1026", limiteElastico:370}
+};
+function calcularChasis(){
+  const f=parseFloat(document.getElementById('input-fuerza').value)||0;
+  const l=parseFloat(document.getElementById('input-longitud').value)||0;
+  const d=parseFloat(document.getElementById('input-diametro').value)||0;
+  const e=parseFloat(document.getElementById('input-espesor').value)||0;
+  const mat=materiales[document.getElementById('select-material').value];
+  const rExt=d/2, rInt=rExt-e;
+  const inerciaMm4=(Math.PI/4)*(Math.pow(rExt,4)-Math.pow(rInt,4));
+  const esfuerzoMPa=(f*l*rExt)/inerciaMm4;
+  const fds=mat.limiteElastico/(esfuerzoMPa||1);
+  const estado = fds>=2.0 ? "ÓPTIMO / SEGURO" : (fds>=1.2 ? "PRECAUCIÓN" : "CRÍTICO / RIESGO");
+  const cls = fds>=2.0 ? "ok" : (fds>=1.2 ? "warn" : "bad");
+  document.getElementById('chasis-out').innerHTML =
+    `Material: <span class="v">${mat.nombre}</span><br>Esfuerzo: <span class="v">${esfuerzoMPa.toFixed(2)} MPa</span><br>
+     Factor de seguridad: <span class="v ${cls}">${fds.toFixed(2)}</span> <span class="status-pill" style="color:var(--${cls==='ok'?'green':cls==='warn'?'amber':'danger'})">${estado}</span>`;
+  localStorage.setItem('vf_last_chasis', JSON.stringify({fds:fds.toFixed(2), estado}));
+  const chasisHist = JSON.parse(localStorage.getItem('vf_chasis_history')||'[]');
+  chasisHist.unshift({fds:fds.toFixed(2), estado, at:new Date().toISOString()});
+  localStorage.setItem('vf_chasis_history', JSON.stringify(chasisHist.slice(0,50)));
+}
+function calcularTransmision(){
+  const pinon=parseFloat(document.getElementById('input-pinon').value)||1;
+  const corona=parseFloat(document.getElementById('input-corona').value)||1;
+  const rpm=parseFloat(document.getElementById('input-rpm').value)||0;
+  const radio=parseFloat(document.getElementById('input-radio-rueda').value)||0;
+  const relacion=corona/pinon;
+  const rpmRueda=rpm/relacion;
+  const velKmh=(rpmRueda*2*Math.PI*(radio/1000)*60)/1000;
+  document.getElementById('gear-out').innerHTML =
+    `Relación: <span class="v">${relacion.toFixed(2)}:1</span><br>RPM en rueda: <span class="v">${rpmRueda.toFixed(0)}</span><br>
+     Velocidad teórica: <span class="v ok">${velKmh.toFixed(1)} km/h</span>`;
+  localStorage.setItem('vf_last_gear', JSON.stringify({relacion:relacion.toFixed(2), velKmh:velKmh.toFixed(1)}));
+  const gearHist = JSON.parse(localStorage.getItem('vf_gear_history')||'[]');
+  gearHist.unshift({relacion:relacion.toFixed(2), velKmh:velKmh.toFixed(1), at:new Date().toISOString()});
+  localStorage.setItem('vf_gear_history', JSON.stringify(gearHist.slice(0,50)));
+}
+function calcularEnfriamiento(){
+  const hp=parseFloat(document.getElementById('input-hp').value)||0;
+  const tempAmb=parseFloat(document.getElementById('input-temp-amb').value)||0;
+  const eficiencia=0.85;
+  const calorKw=hp*0.7457*1.5;
+  const caudalLpm=(calorKw*60)/(4.184*15);
+  const areaCm2=(calorKw*1000)/(0.05*(90-tempAmb)*eficiencia);
+  document.getElementById('cooling-out').innerHTML =
+    `Calor generado: <span class="v">${calorKw.toFixed(1)} kW</span><br>Caudal mínimo: <span class="v">${caudalLpm.toFixed(1)} L/min</span><br>
+     Área de radiador: <span class="v ok">${areaCm2.toFixed(0)} cm²</span>`;
+  localStorage.setItem('vf_last_cool', JSON.stringify({caudalLpm:caudalLpm.toFixed(1), areaCm2:areaCm2.toFixed(0)}));
+  const coolHist = JSON.parse(localStorage.getItem('vf_cool_history')||'[]');
+  coolHist.unshift({caudalLpm:caudalLpm.toFixed(1), areaCm2:areaCm2.toFixed(0), at:new Date().toISOString()});
+  localStorage.setItem('vf_cool_history', JSON.stringify(coolHist.slice(0,50)));
+}
+
+/* ---------- Build (GitHub Actions real) ---------- */
+async function dispararBuild(){
+  const status=document.getElementById('build-status'), link=document.getElementById('build-link'), btn=document.getElementById('btn-build');
+  const c=cfg(); const specRaw=localStorage.getItem('vf_last_spec');
+  if(!c.token||!c.owner||!c.repo||!c.workflow){ status.innerHTML='<span class="v bad">Configura primero Config.</span>'; return; }
+  if(!specRaw){ status.innerHTML='<span class="v bad">Genera primero una especificación en Vehicle Creator.</span>'; return; }
+  const spec=JSON.parse(specRaw); btn.disabled=true; status.innerHTML='Enviando workflow_dispatch…'; link.innerHTML='';
+  try{
+    const dispatchAt=new Date();
+    const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/actions/workflows/${encodeURIComponent(c.workflow)}/dispatches`,{
+      method:'POST',
+      headers:{'Authorization':`Bearer ${c.token}`,'Accept':'application/vnd.github+json','Content-Type':'application/json'},
+      body:JSON.stringify({ref:c.branch, inputs:{
+        vehicle_name:String(spec.name), architecture:String(spec.architecture),
+        material:String(spec.material), suspension:String(spec.suspension), powertrain:String(spec.powertrain)
+      }})
+    });
+    if(res.status===204){
+      localStorage.setItem('vf_last_build', JSON.stringify({status:'DISPARADO', at:dispatchAt.toISOString()}));
+      status.innerHTML='<span class="v ok">Workflow disparado.</span> Buscando run…';
+      setTimeout(()=>buscarRunDesde(), 4000);
+    } else if(res.status===404) status.innerHTML='<span class="v bad">Workflow no encontrado (revisa el nombre .yml).</span>';
+    else if(res.status===401||res.status===403) status.innerHTML='<span class="v bad">Sin permiso (token necesita repo + workflow).</span>';
+    else status.innerHTML=`<span class="v warn">Respuesta inesperada: ${res.status}</span>`;
+  } catch(e){ status.innerHTML='<span class="v bad">Error de conexión.</span>'; }
+  finally{ btn.disabled=false; }
+}
+async function buscarRunDesde(){
+  const c=cfg(); const status=document.getElementById('build-status');
+  try{
+    const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/actions/workflows/${encodeURIComponent(c.workflow)}/runs?event=workflow_dispatch&per_page=5`,
+      {headers:{'Authorization':`Bearer ${c.token}`,'Accept':'application/vnd.github+json'}});
+    const data=await res.json();
+    if(!data.workflow_runs||!data.workflow_runs.length){ status.innerHTML='<span class="v warn">Aún no aparece el run. Prueba "Consultar último run".</span>'; return; }
+    mostrarRun(data.workflow_runs[0]); pollRun(data.workflow_runs[0].id);
+  } catch(e){ status.innerHTML='<span class="v bad">No se pudo consultar el run.</span>'; }
+}
+async function consultarUltimoRun(){
+  const c=cfg(); const status=document.getElementById('build-status');
+  if(!c.token||!c.owner||!c.repo||!c.workflow){ status.innerHTML='<span class="v bad">Configura primero Config.</span>'; return; }
+  status.innerHTML='Consultando…';
+  try{
+    const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/actions/workflows/${encodeURIComponent(c.workflow)}/runs?per_page=1`,
+      {headers:{'Authorization':`Bearer ${c.token}`,'Accept':'application/vnd.github+json'}});
+    const data=await res.json();
+    if(!data.workflow_runs||!data.workflow_runs.length){ status.innerHTML='Sin runs registrados aún.'; return; }
+    mostrarRun(data.workflow_runs[0]);
+  } catch(e){ status.innerHTML='<span class="v bad">Error consultando GitHub.</span>'; }
+}
+function mostrarRun(run){
+  const status=document.getElementById('build-status'), link=document.getElementById('build-link');
+  const cls = run.conclusion==='success' ? 'ok' : (run.status==='in_progress'||run.status==='queued' ? 'warn' : 'bad');
+  const estado = run.conclusion ? run.conclusion.toUpperCase() : run.status.toUpperCase();
+  status.innerHTML = `Run #${run.run_number}: <span class="v ${cls}">${estado}</span>`;
+  link.innerHTML = `<a href="${run.html_url}" target="_blank" style="color:var(--cyan);">Ver log completo en GitHub →</a>`;
+  localStorage.setItem('vf_last_build', JSON.stringify({status:estado, at:new Date().toISOString(), url:run.html_url}));
+  const buildHist = JSON.parse(localStorage.getItem('vf_build_history')||'[]');
+  buildHist.unshift({status:estado, at:new Date().toISOString(), url:run.html_url});
+  localStorage.setItem('vf_build_history', JSON.stringify(buildHist.slice(0,50)));
+}
+function pollRun(runId){
+  const c=cfg(); let intentos=0;
+  const iv=setInterval(async ()=>{
+    intentos++; if(intentos>20){ clearInterval(iv); return; }
+    try{
+      const res=await fetch(`https://api.github.com/repos/${c.owner}/${c.repo}/actions/runs/${runId}`,
+        {headers:{'Authorization':`Bearer ${c.token}`,'Accept':'application/vnd.github+json'}});
+      const run=await res.json(); mostrarRun(run);
+      if(run.status==='completed') clearInterval(iv);
+    } catch(e){}
+  }, 8000);
+}
+
+/* ---------- Dashboard: readiness real (no inventado) ---------- */
+function refrescarDashboard(){
+  const c=cfg();
+  document.getElementById('d-token').textContent = c.token ? 'configurada' : '— sin configurar —';
+  document.getElementById('d-repo').textContent = (c.owner&&c.repo) ? `${c.owner}/${c.repo}` : '— sin configurar —';
+
+  const specRaw=localStorage.getItem('vf_last_spec');
+  document.getElementById('d-vin').textContent = specRaw ? JSON.parse(specRaw).name : '— sin registrar —';
+
+  const buildRaw=localStorage.getItem('vf_last_build');
+  document.getElementById('d-build').textContent = buildRaw ? JSON.parse(buildRaw).status : '— sin ejecutar —';
+
+  const chasisRaw=localStorage.getItem('vf_last_chasis');
+  document.getElementById('d-chasis').textContent = chasisRaw ? `FdS ${JSON.parse(chasisRaw).fds} (${JSON.parse(chasisRaw).estado})` : 'pendiente';
+  const gearRaw=localStorage.getItem('vf_last_gear');
+  document.getElementById('d-gear').textContent = gearRaw ? `${JSON.parse(gearRaw).relacion}:1, ${JSON.parse(gearRaw).velKmh} km/h` : 'pendiente';
+  const coolRaw=localStorage.getItem('vf_last_cool');
+  document.getElementById('d-cool').textContent = coolRaw ? `${JSON.parse(coolRaw).caudalLpm} L/min` : 'pendiente';
+
+  document.getElementById('topStatus').textContent = c.token ? 'SYSTEM READY' : 'CONFIGURA CREDENCIAL';
+
+  // Readiness real: 5 pasos posibles completados
+  const pasos = [!!c.token, !!specRaw, !!chasisRaw, !!gearRaw, !!buildRaw && JSON.parse(buildRaw||'{}').status==='SUCCESS'];
+  const pct = Math.round((pasos.filter(Boolean).length / pasos.length) * 100);
+  document.getElementById('readinessNum').textContent = pct + '%';
+  document.getElementById('readinessRing').style.background =
+    `conic-gradient(var(--cyan) ${pct*3.6}deg, #123742 0deg)`;
+}
+
+/* ---------- Vista 3D (Three.js real, geometría paramétrica desde la spec) ---------- */
+let scene3d, camera3d, renderer3d, controls3d, vehicleGroup, autoRotate=true, animId=null;
+
+function initScene3D(){
+  const wrap = document.getElementById('canvas3d-wrap');
+  if(scene3d) { onResize3D(); return; } // ya inicializada, solo reajustar tamaño
+
+  scene3d = new THREE.Scene();
+  scene3d.background = new THREE.Color(0x03070a);
+
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  camera3d = new THREE.PerspectiveCamera(45, w/h, 0.1, 100);
+  camera3d.position.set(5, 3, 6);
+
+  renderer3d = new THREE.WebGLRenderer({antialias:true});
+  renderer3d.setSize(w, h);
+  wrap.innerHTML = '';
+  wrap.appendChild(renderer3d.domElement);
+
+  const grid = new THREE.GridHelper(12, 12, 0x123742, 0x0d1a20);
+  scene3d.add(grid);
+
+  const amb = new THREE.AmbientLight(0x8899aa, 0.6);
+  scene3d.add(amb);
+  const dir = new THREE.DirectionalLight(0x00eaff, 0.9);
+  dir.position.set(4,6,4);
+  scene3d.add(dir);
+  const dir2 = new THREE.DirectionalLight(0x00ff9d, 0.4);
+  dir2.position.set(-4,2,-4);
+  scene3d.add(dir2);
+
+  controls3d = new THREE.OrbitControls(camera3d, renderer3d.domElement);
+  controls3d.enableDamping = true;
+  controls3d.dampingFactor = 0.08;
+  controls3d.autoRotate = autoRotate;
+  controls3d.autoRotateSpeed = 2.2;
+
+  window.addEventListener('resize', onResize3D);
+
+  function tick(){
+    animId = requestAnimationFrame(tick);
+    controls3d.update();
+    const t = performance.now() * 0.002;
+    suspParts.forEach(p=>{
+      if(p.axis==='rotX'){ p.mesh.rotation.x = p.baseRotX + Math.sin(t)*p.amp; }
+      else { p.mesh.position.y = p.baseY + Math.sin(t)*p.amp; }
+    });
+    renderer3d.render(scene3d, camera3d);
+  }
+  tick();
+}
+
+function onResize3D(){
+  if(!renderer3d) return;
+  const wrap = document.getElementById('canvas3d-wrap');
+  const w = wrap.clientWidth, h = wrap.clientHeight;
+  camera3d.aspect = w/h; camera3d.updateProjectionMatrix();
+  renderer3d.setSize(w, h);
+}
+
+function toggleAutoRotate(){
+  autoRotate = !autoRotate;
+  if(controls3d) controls3d.autoRotate = autoRotate;
+  document.getElementById('btnAutoRotate').textContent = 'AUTO-ROTAR: ' + (autoRotate ? 'ON' : 'OFF');
+}
+
+const MATERIAL_COLOR = { cromoly_4130:0x8fa3b0, acero_1020:0x6a7b86, aluminio_6061:0xd7dade };
+const POWERTRAIN_COLOR = { combustion:0xffb020, electrico:0x00eaff, hibrido:0x00ff9d };
+const MM_TO_UNIT = 1/500; // escala de escena: 500mm reales = 1 unidad 3D
+let suspParts = []; // partes de suspensión a animar (fork/swingarm)
+
+function buildVehicleGroup(spec){
+  const group = new THREE.Group();
+  suspParts = [];
+  const matColor = MATERIAL_COLOR[spec.material] || 0x8fa3b0;
+  const ptColor = POWERTRAIN_COLOR[spec.powertrain] || 0xffb020;
+  const frameMat = new THREE.MeshStandardMaterial({color: matColor, metalness:0.7, roughness:0.35});
+  const wheelMat = new THREE.MeshStandardMaterial({color:0x111417, metalness:0.3, roughness:0.7});
+  const rimMat = new THREE.MeshStandardMaterial({color:0x00eaff, metalness:0.9, roughness:0.2, emissive:0x003a42, emissiveIntensity:0.4});
+  const ptMat = new THREE.MeshStandardMaterial({color:ptColor, metalness:0.5, roughness:0.4, emissive:ptColor, emissiveIntensity:0.25});
+
+  // Medidas reales (mm) tomadas de la especificación, escaladas a unidades de escena
+  const wheelbaseMm = spec.wheelbaseMm || 1400;
+  const wheelDiamMm = spec.wheelDiamMm || 600;
+  const wheelbase = wheelbaseMm * MM_TO_UNIT;
+  const wheelR = (wheelDiamMm/2) * MM_TO_UNIT;
+
+  // Ruedas
+  [-wheelbase/2, wheelbase/2].forEach(x=>{
+    const tire = new THREE.Mesh(new THREE.TorusGeometry(wheelR, wheelR*0.28, 12, 24), wheelMat);
+    tire.rotation.y = Math.PI/2; tire.position.set(x, wheelR, 0);
+    group.add(tire);
+    const rim = new THREE.Mesh(new THREE.CylinderGeometry(wheelR*0.55, wheelR*0.55, wheelR*0.22, 16), rimMat);
+    rim.rotation.z = Math.PI/2; rim.position.set(x, wheelR, 0);
+    group.add(rim);
+  });
+
+  const frameY = wheelR*1.9;
+
+  // Frame según arquitectura
+  if(spec.architecture === 'monocasco'){
+    const shell = new THREE.Mesh(new THREE.BoxGeometry(wheelbase*0.72, 0.55, 0.5), frameMat);
+    shell.position.set(0, frameY+0.15, 0);
+    group.add(shell);
+  } else if(spec.architecture === 'perimetral'){
+    [-0.22, 0.22].forEach(z=>{
+      const beam = new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06, wheelbase*0.7, 12), frameMat);
+      beam.rotation.z = Math.PI/2; beam.position.set(0, frameY, z);
+      group.add(beam);
+    });
+  } else { // tubular_trellis (default)
+    const pts = [
+      [-wheelbase*0.30, frameY],
+      [ wheelbase*0.30, frameY],
+      [-wheelbase*0.10, frameY+0.55],
+      [ wheelbase*0.10, frameY+0.55]
+    ];
+    const trellisPairs = [[0,1],[0,2],[1,3],[2,3],[0,3],[1,2]];
+    trellisPairs.forEach(([a,b])=>{
+      const p1=pts[a], p2=pts[b];
+      const dx=p2[0]-p1[0], dy=p2[1]-p1[1];
+      const len=Math.sqrt(dx*dx+dy*dy);
+      const tube = new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.055,len,10), frameMat);
+      tube.position.set((p1[0]+p2[0])/2, (p1[1]+p2[1])/2, 0);
+      tube.rotation.z = Math.atan2(dy,dx) + Math.PI/2;
+      group.add(tube);
+    });
+  }
+
+  // Powertrain (bloque motor central, color según tipo)
+  const engine = new THREE.Mesh(new THREE.BoxGeometry(0.9, 0.7, 0.55), ptMat);
+  engine.position.set(0, frameY-0.35, 0);
+  group.add(engine);
+
+  // Suspensión delantera/trasera según tipo (partes registradas para animar su recorrido)
+  const forkX = wheelbase/2;
+  if(spec.suspension === 'mcpherson'){
+    const strut = new THREE.Mesh(new THREE.CylinderGeometry(0.06,0.06,1.1,10), frameMat);
+    strut.position.set(forkX, wheelR+0.55, 0); strut.rotation.z = 0.28;
+    group.add(strut);
+    suspParts.push({mesh:strut, baseY:wheelR+0.55, amp:0.04});
+  } else if(spec.suspension === 'basculante'){
+    const swing = new THREE.Mesh(new THREE.CylinderGeometry(0.07,0.07, wheelbase*0.32, 10), frameMat);
+    swing.position.set(-wheelbase*0.35, wheelR, 0); swing.rotation.z = Math.PI/2;
+    group.add(swing);
+    suspParts.push({mesh:swing, baseRotX:0, amp:0.05, axis:'rotX'});
+  } else { // doble_horquilla
+    [-0.14, 0.14].forEach(z=>{
+      const fork = new THREE.Mesh(new THREE.CylinderGeometry(0.055,0.055,1.15,10), frameMat);
+      fork.position.set(forkX, wheelR+0.55, z); fork.rotation.z = 0.28;
+      group.add(fork);
+      suspParts.push({mesh:fork, baseY:wheelR+0.55, amp:0.04});
+    });
+  }
+
+  return group;
+}
+
+function actualizarVista3D(){
+  const out = document.getElementById('view3d-out');
+  const hint = document.getElementById('canvas3d-hint');
+  const specRaw = localStorage.getItem('vf_last_spec');
+  if(!specRaw){
+    out.innerHTML = '<span class="v bad">No hay especificación generada. Ve a "Especificación" y genera una.</span>';
+    if(hint) hint.style.display='flex';
+    return;
+  }
+  if(hint) hint.style.display='none';
+  const spec = JSON.parse(specRaw);
+  if(!scene3d) initScene3D();
+
+  if(vehicleGroup) scene3d.remove(vehicleGroup);
+  vehicleGroup = buildVehicleGroup(spec);
+  scene3d.add(vehicleGroup);
+
+  out.innerHTML = `Renderizando <span class="v ok">${spec.name}</span> — wheelbase: <span class="v">${spec.wheelbaseMm||1400} mm</span>, rueda: <span class="v">${spec.wheelDiamMm||600} mm</span>, arquitectura: <span class="v">${spec.architecture}</span>, material: <span class="v">${spec.material}</span>, suspensión: <span class="v">${spec.suspension}</span> (animada), powertrain: <span class="v">${spec.powertrain}</span>.`;
+}
+
+/* ---------- Diagnostics (umbrales reales, sin invención) ---------- */
+function evaluarDiagnostico(){
+  const temp = parseFloat(document.getElementById('dx-temp').value)||0;
+  const oil = parseFloat(document.getElementById('dx-oil').value)||0;
+  const vib = document.getElementById('dx-vib').checked;
+  const sos = document.getElementById('dx-sos').checked;
+
+  let nivel = 'ok'; const problemas = [];
+  if(temp > 110){ nivel='bad'; problemas.push('Sobrecalentamiento crítico (>110°C)'); }
+  else if(temp > 95){ if(nivel==='ok') nivel='warn'; problemas.push('Temperatura elevada (>95°C)'); }
+
+  if(oil < 15){ nivel='bad'; problemas.push('Presión de aceite crítica (<15 PSI)'); }
+  else if(oil < 25){ if(nivel!=='bad') nivel='warn'; problemas.push('Presión de aceite baja (<25 PSI)'); }
+
+  if(vib){ if(nivel!=='bad') nivel='warn'; problemas.push('Vibración anormal reportada'); }
+  if(sos){ nivel='bad'; problemas.push('Alerta SOS activa'); }
+
+  const etiqueta = nivel==='bad' ? 'CRÍTICO' : (nivel==='warn' ? 'PRECAUCIÓN' : 'ÓPTIMO');
+  const out = document.getElementById('dx-out');
+  out.innerHTML = `Estado: <span class="v ${nivel}">${etiqueta}</span>` + (problemas.length ? '<br>' + problemas.join('<br>') : '<br>Todos los parámetros dentro de rango.');
+
+  const historial = JSON.parse(localStorage.getItem('vf_dx_history')||'[]');
+  historial.unshift({at:new Date().toISOString(), temp, oil, vib, sos, nivel, etiqueta});
+  localStorage.setItem('vf_dx_history', JSON.stringify(historial.slice(0,30)));
+  renderDxHistory();
+}
+
+const DTC_DB = {
+  P0100:'Circuito del sensor de flujo de aire (MAF) — mal funcionamiento',
+  P0171:'Sistema demasiado pobre (Banco 1)',
+  P0172:'Sistema demasiado rico (Banco 1)',
+  P0300:'Fallo de encendido detectado en múltiples cilindros (misfire aleatorio)',
+  P0301:'Fallo de encendido — cilindro 1',
+  P0302:'Fallo de encendido — cilindro 2',
+  P0303:'Fallo de encendido — cilindro 3',
+  P0304:'Fallo de encendido — cilindro 4',
+  P0325:'Circuito del sensor de golpeteo (knock sensor)',
+  P0335:'Circuito del sensor de posición del cigüeñal',
+  P0420:'Eficiencia del catalizador por debajo del umbral (Banco 1)',
+  P0442:'Fuga pequeña detectada en el sistema EVAP',
+  P0500:'Mal funcionamiento del sensor de velocidad del vehículo',
+  P0505:'Mal funcionamiento del sistema de control de ralentí',
+  P0562:'Voltaje del sistema bajo (batería/alternador)',
+  P0606:'Fallo interno del módulo de control del motor (ECM/PCM)',
+  P0700:'Solicitud de mal funcionamiento del sistema de control de transmisión'
+};
+function interpretarDTC(){
+  const code = document.getElementById('dx-code').value.trim().toUpperCase();
+  const out = document.getElementById('dtc-out');
+  if(DTC_DB[code]){
+    out.innerHTML = `<span class="v">${code}</span>: ${DTC_DB[code]}`;
+  } else {
+    out.innerHTML = `<span class="v warn">${code}</span> no está en la base local de códigos comunes. Verifica el código o consulta la base completa SAE J2012.`;
+  }
+}
+function renderDxHistory(){
+  const historial = JSON.parse(localStorage.getItem('vf_dx_history')||'[]');
+  const el = document.getElementById('dx-history');
+  if(!historial.length){ el.innerHTML='Sin registros aún.'; return; }
+  el.innerHTML = historial.slice(0,8).map(h=>{
+    const fecha = new Date(h.at).toLocaleString('es-MX');
+    return `${fecha} — <span class="v ${h.nivel}">${h.etiqueta}</span> (temp ${h.temp}°C, aceite ${h.oil} PSI)`;
+  }).join('<br>');
+}
+
+/* ---------- Telemetry (registro manual real, con fecha/hora real) ---------- */
+function registrarLectura(){
+  const lectura = {
+    rpm: parseFloat(document.getElementById('tm-rpm').value)||0,
+    speed: parseFloat(document.getElementById('tm-speed').value)||0,
+    temp: parseFloat(document.getElementById('tm-temp').value)||0,
+    volt: parseFloat(document.getElementById('tm-volt').value)||0,
+    at: new Date().toISOString()
+  };
+  localStorage.setItem('vf_last_telemetry', JSON.stringify(lectura));
+  const historial = JSON.parse(localStorage.getItem('vf_tm_history')||'[]');
+  historial.unshift(lectura);
+  localStorage.setItem('vf_tm_history', JSON.stringify(historial.slice(0,50)));
+  renderUltimaLectura();
+  renderTmHistory();
+}
+function renderUltimaLectura(){
+  const raw = localStorage.getItem('vf_last_telemetry');
+  if(!raw) return;
+  const l = JSON.parse(raw);
+  document.getElementById('tm-d-rpm').textContent = l.rpm;
+  document.getElementById('tm-d-speed').textContent = l.speed + ' km/h';
+  document.getElementById('tm-d-temp').textContent = l.temp + ' °C';
+  document.getElementById('tm-d-volt').textContent = l.volt + ' V';
+  document.getElementById('tm-d-at').textContent = new Date(l.at).toLocaleString('es-MX');
+}
+function renderTmHistory(){
+  const historial = JSON.parse(localStorage.getItem('vf_tm_history')||'[]');
+  const el = document.getElementById('tm-history');
+  if(!historial.length){ el.innerHTML='Sin lecturas registradas.'; return; }
+  el.innerHTML = historial.slice(0,10).map(h=>{
+    const fecha = new Date(h.at).toLocaleString('es-MX');
+    return `${fecha} — RPM ${h.rpm}, ${h.speed} km/h, ${h.temp}°C, ${h.volt} V`;
+  }).join('<br>');
+}
+
+/* ---------- Analytics (agregados reales del uso local, no inventados) ---------- */
+function renderAnalytics(){
+  const chasisRaw = localStorage.getItem('vf_last_chasis');
+  const gearHist = JSON.parse(localStorage.getItem('vf_gear_history')||'[]');
+  const coolHist = JSON.parse(localStorage.getItem('vf_cool_history')||'[]');
+  const chasisHist = JSON.parse(localStorage.getItem('vf_chasis_history')||'[]');
+  const dxHist = JSON.parse(localStorage.getItem('vf_dx_history')||'[]');
+  const buildHist = JSON.parse(localStorage.getItem('vf_build_history')||'[]');
+
+  document.getElementById('an-chasis-n').textContent = chasisHist.length;
+  const avgFds = chasisHist.length ? (chasisHist.reduce((s,h)=>s+parseFloat(h.fds),0)/chasisHist.length).toFixed(2) : '—';
+  document.getElementById('an-chasis-avg').textContent = avgFds;
+  document.getElementById('an-gear-n').textContent = gearHist.length;
+  document.getElementById('an-cool-n').textContent = coolHist.length;
+
+  const dxOk = dxHist.filter(h=>h.nivel==='ok').length;
+  const dxWarn = dxHist.filter(h=>h.nivel==='warn').length;
+  const dxBad = dxHist.filter(h=>h.nivel==='bad').length;
+  document.getElementById('an-dx-n').textContent = dxHist.length;
+  document.getElementById('an-dx-ok').textContent = dxOk;
+  document.getElementById('an-dx-warn').textContent = dxWarn;
+  document.getElementById('an-dx-bad').textContent = dxBad;
+
+  const total = dxHist.length || 1;
+  const pctOk = Math.round(dxOk/total*100), pctWarn = Math.round(dxWarn/total*100), pctBad = Math.round(dxBad/total*100);
+  document.getElementById('an-bar-ok').style.width = pctOk+'%'; document.getElementById('an-bar-ok-lbl').textContent = pctOk+'%';
+  document.getElementById('an-bar-warn').style.width = pctWarn+'%'; document.getElementById('an-bar-warn-lbl').textContent = pctWarn+'%';
+  document.getElementById('an-bar-bad').style.width = pctBad+'%'; document.getElementById('an-bar-bad-lbl').textContent = pctBad+'%';
+
+  document.getElementById('an-build-n').textContent = buildHist.length;
+  document.getElementById('an-build-last').textContent = buildHist.length ? buildHist[0].status : '—';
+}
+
+/* ---------- Init ---------- */
+cargarConfigEnForm();
+refrescarDashboard();
+</script>
+</body>
+</html>
