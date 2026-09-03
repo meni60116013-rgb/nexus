@@ -1,0 +1,39 @@
+name: VCORE Master Factory Android
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - 'master-factory-android/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.7'
+
+      - name: Build APK
+        working-directory: master-factory-android
+        run: gradle --no-daemon --stacktrace assembleDebug
+
+      - name: Upload Factory APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: vcore-master-factory-apk
+          path: master-factory-android/app/build/outputs/apk/debug/app-debug.apk
+          if-no-files-found: error
